@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:#F4EFE6;color:#16130F;font-family:'Instrument Serif',serif;position:relative;padding:72px 80px}
+.k{font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#6B6257;display:flex;align-items:center;gap:14px}
+.dot{width:12px;height:12px;border-radius:50%;background:#E5532D;box-shadow:0 0 0 6px rgba(229,83,45,.15)}
+h1{font-size:132px;line-height:.95;font-weight:400;letter-spacing:-.02em;margin-top:56px}
+h1 em{color:#E5532D}
+.u{position:absolute;left:80px;bottom:64px;font-family:'JetBrains Mono',monospace;font-size:24px;color:#16130F}
+.u b{font-weight:500;color:#6B6257}
+.wave{position:absolute;right:80px;bottom:60px;display:flex;align-items:center;gap:9px;height:150px}
+.wave i{display:block;width:10px;border-radius:5px;background:#16130F}
+.rule{position:absolute;left:80px;right:80px;top:132px;height:1px;background:#16130F;opacity:.15}
+</style></head><body>
+<div class="k"><span class="dot"></span>Wispr Flow · India Hiring Challenge</div>
+<div class="rule"></div>
+<h1>Ishan Kabra,<br><em>in my own words.</em></h1>
+<div class="u"><b>ishankabra.com/</b>wisprflow</div>
+<div class="wave" id="w"></div>
+<script>
+const h=[18,34,58,40,86,120,72,140,96,52,110,64,30,78,46,22,12];
+document.getElementById('w').innerHTML=h.map((v,i)=>`<i style="height:${v}px;opacity:${i>12?.35:1};background:${i==7?'#E5532D':''}"></i>`).join('');
+</script></body></html>
