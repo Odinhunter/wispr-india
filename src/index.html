@@ -2367,8 +2367,6 @@ window.PlanFX = PlanFX;
 function start() {
   const ok = World.init($('.world')); if (!ok) document.documentElement.classList.add('no-gl');
   PlanFX.init(); World.resize(window.innerWidth, window.innerHeight); measure();
-  // layout depends on text size, so measure again whenever a late font finishes loading
-  if (document.fonts) { document.fonts.ready.then(() => measure()); if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { clearTimeout(rt); rt = setTimeout(measure, 100); }); }
   if (window.Lenis && !REDUCED) { try { lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 }); } catch (e) { lenis = null; } }
   introT0 = performance.now() / 1000 + 0.2; requestAnimationFrame(loop);
   setTimeout(() => { intro.classList.add('done'); document.body.classList.add('ready'); }, REDUCED ? 0 : 450);
