@@ -3,9 +3,9 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.ishankabra.com" }],
-      "destination": "https://ishankabra.com/:path*",
+      "destination": "https://ishankabra.com/$1",
       "permanent": true
     },
     { "source": "/", "destination": "/wisprflow", "permanent": false }
