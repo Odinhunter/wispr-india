@@ -3,3 +3,8 @@ node_modules
 .DS_Store
 .env*
 design/_*.png
+design/.tools/
+design/qa/node_modules/
+design/qa/out/
+public/wisprflow/index.html
+public/fonts/
