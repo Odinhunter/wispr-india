@@ -1,5 +1,13 @@
 {
   "outputDirectory": "public",
   "cleanUrls": true,
-  "redirects": [{ "source": "/", "destination": "/wisprflow", "permanent": false }]
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.ishankabra.com" }],
+      "destination": "https://ishankabra.com/:path*",
+      "permanent": true
+    },
+    { "source": "/", "destination": "/wisprflow", "permanent": false }
+  ]
 }
