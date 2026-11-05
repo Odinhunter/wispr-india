@@ -851,31 +851,26 @@ body[data-cards="1"] #hul .beat:not(:last-of-type) .blk, body[data-cards="1"] #b
 .spacer.lead { height: 70svh; }
 .spacer.lead2 { height: 50svh; }
  }
-#ducks .duck { margin: 0; display: grid; justify-items: center; gap: 6px; }
-#ducks .duck svg { width: 58px; height: 67px; overflow: visible; transform-origin: 50% 96%; animation: dk-waddle 0.9s ease-in-out infinite alternate; }
-#ducks .duck:nth-child(3) svg { animation-delay: -0.45s; }
-#ducks .duck:nth-child(4) svg { animation-delay: -0.2s; }
-#ducks .duck:nth-child(5) svg { animation-delay: -0.65s; }
-#ducks .duck:nth-child(6) svg { animation-delay: -0.3s; }
-#ducks .duck.tall svg { animation: dk-proud 2.4s ease-in-out infinite alternate; }
-@keyframes dk-waddle { from { transform: rotate(-6deg); } to { transform: rotate(6deg) translateY(-2px); } }
-@keyframes dk-proud { from { transform: scale(1.12); } to { transform: scale(1.18) translateY(-2px); } }
-@media (prefers-reduced-motion: reduce) { #ducks .duck svg, #ducks .duck.tall svg { animation: none; } #ducks .duck.tall svg { transform: scale(1.15); } }
+@keyframes dk-waddle { from { transform: rotate(-3deg); } to { transform: rotate(3deg) translateY(-3px); } }
 #ducks .beat.dk-one { justify-content: center; padding-inline: clamp(16px, 4vw, 72px); }
 #ducks .dk-box { width: 100%; max-width: 1080px; margin: 0 auto; padding: clamp(22px, 2.8vw, 40px); background: rgba(12, 14, 20, 0.74); -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 22px; box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7); }
 #ducks .dk-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px clamp(24px, 3vw, 48px); align-items: center; }
 #ducks .dk-head h2 { margin-bottom: 12px; }
 #ducks .dk-head p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 46ch; }
-#ducks .duckrow { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 0; }
-#ducks .duck { flex: none; width: 58px; margin: 0; }
-#ducks .duck svg { width: 52px; height: 60px; filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.35)); }
+#ducks .duckrow { display: flex; align-items: flex-end; gap: 6px 16px; margin: 0; }
+#ducks .duck { display: block; width: auto; height: 96px; transform-origin: 50% 96%; filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.4)); animation: dk-waddle 0.9s ease-in-out infinite alternate; }
+#ducks .duck:nth-child(2) { animation-delay: -0.45s; }
+#ducks .duck:nth-child(3) { animation-delay: -0.2s; }
+#ducks .duck:nth-child(4) { animation-delay: -0.65s; }
+#ducks .duck:nth-child(5) { animation-delay: -0.3s; }
+@media (prefers-reduced-motion: reduce) { #ducks .duck { animation: none; } }
 #ducks .dk-ideas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px clamp(24px, 3vw, 48px); margin-top: clamp(20px, 2.4vw, 30px); padding-top: clamp(18px, 2.2vw, 26px); border-top: 1px solid rgba(255, 255, 255, 0.09); }
 #ducks .dk-ideas h3 { margin: 0 0 8px; font-size: 13px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--acc); }
 #ducks .dk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 #ducks .dk-list li { font-size: 15px; line-height: 1.5; }
 #ducks .dk-list b { color: var(--acc); font-weight: 600; }
 #ducks .dk-q { grid-column: 1 / -1; margin: 0 0 2px; font-family: var(--display); font-weight: 560; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.01em; }
-@media (max-width: 860px) { #ducks .dk-head, #ducks .dk-ideas { grid-template-columns: minmax(0, 1fr); } #ducks .duckrow { gap: 8px 6px; } #ducks .duck { width: 56px; } #ducks .duck svg { width: 44px; height: 51px; } }
+@media (max-width: 860px) { #ducks .dk-head, #ducks .dk-ideas { grid-template-columns: minmax(0, 1fr); } #ducks .duckrow { gap: 10px; } #ducks .duck { height: 70px; } }
 
 /* After hours: project cards */
 .pj { display: grid; gap: 14px; margin-top: 28px; }
@@ -1116,9 +1111,12 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
           <h2 id="h-ducks">My $3,000 oddly specific setup: five Microducks</h2>
           <p>Small open-source walking robot ducks from Pollen Robotics and Hugging Face, 25 cm tall, with their Dev, Accessory and Charger packs. $2,980 in all.</p>
         </div>
-        <div class="duckrow" role="img" aria-label="Five cartoon ducks in the Microduck colours, one standing tall while the others waddle">
-        <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><symbol id="dk" viewBox="0 0 64 74"><path d="M20 70h10M34 70h10" stroke="#F29A3D" stroke-width="4" stroke-linecap="round"/><path d="M25 58v12M39 58v12" stroke="#F29A3D" stroke-width="3.5" stroke-linecap="round"/><path d="M9 41 L2 31 L14 36 Z" fill="currentColor"/><ellipse cx="30" cy="46" rx="22" ry="15" fill="currentColor" stroke="rgba(255,255,255,.32)" stroke-width="1.2"/><circle cx="40" cy="22" r="12" fill="currentColor" stroke="rgba(255,255,255,.32)" stroke-width="1.2"/><rect x="32" y="25" width="14" height="15" fill="currentColor"/><path d="M50 19 L62 23 L50 27 Z" fill="#F29A3D"/><circle cx="44" cy="19" r="2.3" fill="#15161A"/><circle cx="44.8" cy="18.2" r="0.7" fill="#fff"/><path d="M16 44 Q30 36 40 47 Q28 54 16 44 Z" fill="rgba(0,0,0,.14)"/></symbol></defs></svg>
-        <figure class="duck tall" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#5A5F6B"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#C8B6F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#A8D4F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure>
+        <div class="duckrow" role="img" aria-label="Five Microduck robots walking in a row">
+          <img class="duck" src="/microduck.webp" alt="" width="76" height="116" decoding="async" loading="lazy">
+          <img class="duck" src="/microduck.webp" alt="" width="76" height="116" decoding="async" loading="lazy">
+          <img class="duck" src="/microduck.webp" alt="" width="76" height="116" decoding="async" loading="lazy">
+          <img class="duck" src="/microduck.webp" alt="" width="76" height="116" decoding="async" loading="lazy">
+          <img class="duck" src="/microduck.webp" alt="" width="76" height="116" decoding="async" loading="lazy">
         </div>
       </div>
       <div class="dk-ideas">
