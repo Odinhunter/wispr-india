@@ -118,7 +118,7 @@ p { margin: 0 0 16px; max-width: 36em; font-size: clamp(17px, 1.28vw, 20px); lin
 .ai-card .fi-d { margin: 0; font-size: clamp(15px, 1.1vw, 16.5px); line-height: 1.6; color: var(--ink-2); }
 .ai-card .fi-tags { margin-top: 10px; }
 #college .ai-card p { text-shadow: none; }
-#college p[data-read] + .label, #college .allin + .label { margin-top: clamp(30px, 3vw, 44px); }
+#college p[data-read] + .label { margin-top: clamp(30px, 3vw, 44px); }
 @media (max-width: 760px) { #college .blk { position: relative; isolation: isolate; } #college .blk::before { content: ""; position: absolute; inset: -6% -4%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(5, 6, 14, 0.72), rgba(5, 6, 14, 0.45) 60%, rgba(5, 6, 14, 0)); } }
 .strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 46px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; }
 .strip li { padding: 26px 22px 28px; border-left: 1px solid var(--line); }
@@ -986,14 +986,12 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
       <p class="kick rv"><span class="km">St. Xavier’s College, Mumbai, 2022 to 2025</span></p>
       <p class="place rv" aria-hidden="true">College</p>
       <h2 id="h-college" class="rv">College life opened up a whole new world to me.</h2>
-      <p class="rv" data-read>I had lived in Mumbai all my life. At Xavier’s, I met people from all across the country and learnt things I’d never come across.</p>
+      <p class="rv" data-read>I had lived in Mumbai all my life. At Xavier’s, I met people from all across the country and learnt things I’d never come across. It also taught me project management at its smallest scale: hosting an event, marketing it, and getting people to show up.</p>
       <p class="label rv">Going all in</p>
       <div class="allin rv">
         <div class="ai-card"><p class="fi-k">E-Cell · all three years · Vice-Chairperson in my final year</p><b class="fi-t">The entrepreneurship cell</b><p class="fi-d">I joined in my first year and stayed for all three. In my final year, I led 5 departments and 70+ associates.</p><p class="fi-tags"><span>800+ participants</span><span>2 national events</span><span>10+ workshops</span></p></div>
         <div class="ai-card"><p class="fi-k">Commercium, the commerce society · Vice-President</p><b class="fi-t">ThinkBizz, our blog</b><p class="fi-d">I also ran ThinkBizz, the society’s blog, where we published articles on business, economics, commerce and finance.</p><p class="fi-tags"><span>Business</span><span>Economics</span><span>Commerce</span><span>Finance</span></p></div>
       </div>
-      <p class="label rv">What college taught me</p>
-      <p class="rv" data-read>College let me try a bit of everything and meet all kinds of people. It also taught me project management at its smallest scale: hosting an event, marketing it, and getting people to show up.</p>
     </div>
   </div>
 </section>
@@ -1764,7 +1762,7 @@ const SHOTS = {
   mumbai: [{ at: 0.5, p: [-70, 56, 244], l: [-18, 84, -198] }, { at: 1, p: [-130, 54, 228], l: [-38, 76, -204] }],
   lockdown: [{ at: 0.3, p: [-160, 56, 220], l: [-44, 70, -206] }, { at: 0.62, p: [60, 64, 160], l: [150, 58, -220] }, { at: 1, p: [290, 72, 80], l: [360, 56, -230] }],
   // the fly-in lands as the heading arrives; then a slow drift while the rest of college is read
-  college: [{ at: 0.21, pal: 'night', p: [330, 110, 50], l: [420, 30, -380] }, { at: 0.37, pal: 'mday', p: [420, 150, -300], l: CP(0, 0, 12) }, { at: 0.53, p: CP(170, 30, 74), l: CP(0, 0, 16) }, { at: 0.69, p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 1, p: CP(122, 20, 36), l: CP(0, 0, 21) }],
+  college: [{ at: 0.23, pal: 'night', p: [330, 110, 50], l: [420, 30, -380] }, { at: 0.41, pal: 'mday', p: [420, 150, -300], l: CP(0, 0, 12) }, { at: 0.59, p: CP(170, 30, 74), l: CP(0, 0, 16) }, { at: 0.77, p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 1, p: CP(122, 20, 36), l: CP(0, 0, 21) }],
   hul: [
     { at: 0, env: 'mumbai', pal: 'mday', p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 0.18, env: 'mumbai', pal: 'mday', p: CP(140, 16, 44), l: CP(0, 0, 20) },
     { at: 0.25, env: 'mumbai', pal: 'night', p: CP(230, -100, 320), l: CP(-30, 0, 0), x: { p: CP(290, -160, 720), l: CP(-40, 0, 0) } },
