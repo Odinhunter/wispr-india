@@ -101,10 +101,16 @@ p { margin: 0 0 16px; max-width: 36em; font-size: clamp(17px, 1.28vw, 20px); lin
 .aside { font-family: var(--display); font-size: clamp(19px, 1.6vw, 24px); color: var(--ink-3); }
 .label { margin: 0 0 12px; font-size: 13.5px; font-weight: 720; color: var(--acc); letter-spacing: 0.02em; }
 
-.firsts { margin: 0; padding: 0; list-style: none; counter-reset: f; }
-.firsts li { counter-increment: f; position: relative; padding: 18px 0 18px 58px; border-top: 1px solid var(--line); font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: var(--ink-2); }
-.firsts li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; top: 16px; font-family: var(--display); font-size: 26px; line-height: 1.1; color: var(--acc); }
-.firsts b { display: block; color: var(--ink); font-weight: 720; }
+.firsts { position: relative; display: grid; gap: 14px; margin: 10px 0 0; padding: 0; list-style: none; counter-reset: f; }
+.firsts li { counter-increment: f; position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; }
+.firsts li::before { content: counter(f, decimal-leading-zero); position: relative; z-index: 1; display: grid; place-items: center; width: 40px; height: 40px; margin-top: 16px; border-radius: 50%; font-family: var(--display); font-size: 16px; color: var(--acc); background: var(--night); border: 1px solid color-mix(in srgb, var(--acc) 55%, transparent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 10%, transparent); }
+.firsts li:not(:last-child)::after { content: ""; position: absolute; left: 19.5px; top: 60px; bottom: -30px; width: 1px; background: linear-gradient(var(--acc), color-mix(in srgb, var(--acc) 15%, transparent)); opacity: 0.6; }
+.fi-card { padding: 18px 22px 20px; border-radius: 18px; background: linear-gradient(160deg, rgba(26, 22, 48, 0.78), rgba(10, 9, 22, 0.86)); border: 1px solid var(--line); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.fi-k { margin: 0 0 6px; font-size: 12.5px; font-weight: 620; letter-spacing: 0.01em; color: var(--ink-3); }
+.fi-t { display: block; margin: 0 0 6px; font-family: var(--display); font-size: clamp(22px, 1.9vw, 27px); font-weight: 560; line-height: 1.15; color: var(--ink); }
+.firsts .fi-d { margin: 0; font-size: clamp(15.5px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-2); }
+.fi-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.fi-tags span { padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 650; color: var(--acc); background: color-mix(in srgb, var(--acc) 13%, transparent); }
 .strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 46px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; }
 .strip li { padding: 26px 22px 28px; border-left: 1px solid var(--line); }
 .strip li:first-child { border-left: 0; }
@@ -204,7 +210,10 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
   .hook { font-size: clamp(38px, 10.6vw, 52px); }
   .place { font-size: clamp(52px, 15vw, 76px); }
   .big { font-size: 21px; }
-  .firsts li { padding-left: 44px; }
+  .firsts li { grid-template-columns: 32px minmax(0, 1fr); gap: 12px; }
+  .firsts li::before { width: 32px; height: 32px; font-size: 13.5px; }
+  .firsts li:not(:last-child)::after { left: 15.5px; top: 54px; }
+  .fi-card { padding: 16px 16px 18px; }
   .stats, .strip, .compare, .ideas, .facts { grid-template-columns: minmax(0, 1fr); }
   .strip li, .strip li:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
   .strip li:first-child { border-top: 0; }
@@ -954,10 +963,10 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
       <h2 id="h-lockdown" class="rv">Exploring every opportunity I could get</h2>
       <p class="rv" data-read>When Mumbai locked down in 2020, I was sixteen. School moved online, and so did I: I started looking for anything I could join, start or run.</p>
       <ol class="firsts rv" aria-label="What I started in 2020">
-        <li><b>A chapter.</b> I founded the Mumbai chapter of GAEE and ran more than ten events over the next three years.</li>
-        <li><b>A club.</b> I started an Interact Club in my region.</li>
-        <li><b>A competition.</b> I organised a global pitch competition with more than 200 participants, alongside the South Korean and US chapters.</li>
-        <li><b>A first job.</b> I ran social media for Infigon Futures, a guidance-counselling startup.</li>
+        <li><div class="fi-card"><p class="fi-k">August 2020 to June 2023 · Founder and President</p><b class="fi-t">A chapter of my own</b><p class="fi-d">At sixteen, I founded the Mumbai chapter of the Global Association of Economic Education and ran it for three years, putting on finance and entrepreneurship events for students.</p><p class="fi-tags"><span>10+ events</span><span>3 years</span></p></div></li>
+        <li><div class="fi-card"><p class="fi-k">GAEE, with South Korea and the US</p><b class="fi-t">Then we went global</b><p class="fi-d">I co-ran a pitch competition with GAEE’s South Korean and US chapters. More than 200 students pitched their ideas.</p><p class="fi-tags"><span>200+ participants</span><span>3 chapters, 3 countries</span></p></div></li>
+        <li><div class="fi-card"><p class="fi-k">2020 · Interact Club</p><b class="fi-t">A club in my region</b><p class="fi-d">I started an Interact Club, Rotary’s club for students who want to do community service, in my part of Mumbai.</p></div></li>
+        <li><div class="fi-card"><p class="fi-k">2020 · Infigon Futures</p><b class="fi-t">My first job</b><p class="fi-d">I ran social media for Infigon Futures, a guidance-counselling startup. It was my first look at marketing from the inside.</p></div></li>
       </ol>
     </div>
   </div>
