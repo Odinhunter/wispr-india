@@ -1378,6 +1378,8 @@ const Text = {
     const h = $('.hook');
     if (h) { const t = h.textContent.trim(); h.setAttribute('aria-label', t); h.innerHTML = t.split(/\s+/).map((w) => `<span class="hw" aria-hidden="true">${esc(w)}</span>`).join(' '); this.hw = $$('.hw', h); }
     this.reads = $$('[data-read]').map((p) => { const t = p.textContent; p.innerHTML = t.split(/(\s+)/).map((s) => (/^\s+$/.test(s) ? s : s ? `<span class="w">${esc(s)}</span>` : '')).join(''); const fb = p.closest('#hul .beat:not(:last-of-type), #bain .beat:not(:last-of-type)'); return { el: p, ws: $$('.w', p), n: -1, fade: fb && fb.closest('[data-shot]').dataset.shot }; });
+    // paragraphs in the same block read as one passage: each starts once the one before it is fully lit
+    this.groups = []; this.reads.forEach((r, i) => { const prev = this.reads[i - 1], blk = r.el.closest('.blk'); if (prev && blk && prev.el.closest('.blk') === blk) this.groups[this.groups.length - 1].push(r); else this.groups.push([r]); });
     $$('.blk, .beat').forEach((b) => $$(':scope > .rv, :scope > .quote.rv', b).forEach((el, i) => { el.style.transitionDelay = (i * 0.09).toFixed(2) + 's'; }));
     this.io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add('in'); this.io.unobserve(e.target); if (e.target.matches('.stats')) this.count(e.target); }), { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
     $$('.rv').forEach((el) => this.io.observe(el));
@@ -1398,16 +1400,21 @@ const Text = {
     setTimeout(() => $('.hero').classList.add('on'), REDUCED ? 0 : (t + 0.15) * 1000);
   },
   frame(sy) {
-    for (const r of this.reads) {
-      const b = r.el.getBoundingClientRect(); if (b.bottom < -80 || b.top > VH + 80) continue;
-      let p = clamp((VH * 0.9 - b.top) / (b.height + VH * 0.42), 0, 1) * 1.18;
+    for (const g of this.groups) {
+      // scroll range [s, e] over which each paragraph lights up, chained one after another
+      let cur = -Infinity, s0 = 0;
+      g.forEach((r, k) => { const b = r.el.getBoundingClientRect(); r.b = b; r.s = Math.max(cur, sy + b.top - VH * 0.9); if (!k) s0 = r.s; r.e = Math.min(r.s + (b.height + VH * 0.42) / 1.18, Math.max(r.s + 1, sy + b.bottom - VH * 0.4)); cur = r.e; }); // done by the time its last line is 40% down the screen
       // paragraphs that fade out when the 3D cards take over must finish lighting up first
-      if (r.fade && !(MOBILE || World.portrait)) { const s = SECS.find((x) => x.key === r.fade), y0 = sy + b.top - VH * 0.9, yOn = s.d0 + CARDS_AT[r.fade] * (s.d1 - s.d0) - VH * 0.06; p = Math.max(p, clamp((sy - y0) / Math.max(1, yOn - y0), 0, 1)); }
-      const n = REDUCED ? r.ws.length : Math.min(r.ws.length, Math.round(p * r.ws.length));
-      if (n === r.n) continue;
-      if (r.n < 0) r.ws.forEach((w, i) => w.classList.toggle('on', i < n));
-      else for (let i = Math.min(n, r.n); i < Math.max(n, r.n); i++) r.ws[i].classList.toggle('on', i < n);
-      r.n = n;
+      if (g[0].fade && !(MOBILE || World.portrait)) { const sc = SECS.find((x) => x.key === g[0].fade), end = Math.max(s0 + 1, sc.d0 + CARDS_AT[g[0].fade] * (sc.d1 - sc.d0) - VH * 0.06); if (cur > end) { const f = (end - s0) / (cur - s0); g.forEach((r) => { r.s = s0 + (r.s - s0) * f; r.e = s0 + (r.e - s0) * f; }); } }
+      for (const r of g) {
+        if (r.n >= 0 && (r.b.bottom < -80 || r.b.top > VH + 80)) continue;
+        const p = clamp((sy - r.s) / Math.max(1, r.e - r.s), 0, 1);
+        const n = REDUCED ? r.ws.length : Math.round(p * r.ws.length);
+        if (n === r.n) continue;
+        if (r.n < 0) r.ws.forEach((w, i) => w.classList.toggle('on', i < n));
+        else for (let i = Math.min(n, r.n); i < Math.max(n, r.n); i++) r.ws[i].classList.toggle('on', i < n);
+        r.n = n;
+      }
     }
   },
 };
