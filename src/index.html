@@ -858,7 +858,6 @@ body[data-cards="1"] #hul .beat:not(:last-of-type) .blk, body[data-cards="1"] #b
 #ducks .duck:nth-child(5) svg { animation-delay: -0.65s; }
 #ducks .duck:nth-child(6) svg { animation-delay: -0.3s; }
 #ducks .duck.tall svg { animation: dk-proud 2.4s ease-in-out infinite alternate; }
-#ducks .duck figcaption { font-size: 12px; line-height: 1.2; color: rgba(244, 240, 232, 0.78); }
 @keyframes dk-waddle { from { transform: rotate(-6deg); } to { transform: rotate(6deg) translateY(-2px); } }
 @keyframes dk-proud { from { transform: scale(1.12); } to { transform: scale(1.18) translateY(-2px); } }
 @media (prefers-reduced-motion: reduce) { #ducks .duck svg, #ducks .duck.tall svg { animation: none; } #ducks .duck.tall svg { transform: scale(1.15); } }
@@ -869,14 +868,13 @@ body[data-cards="1"] #hul .beat:not(:last-of-type) .blk, body[data-cards="1"] #b
 #ducks .dk-head p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 46ch; }
 #ducks .duckrow { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 0; }
 #ducks .duck { flex: none; width: 58px; margin: 0; }
-#ducks .duck figcaption { white-space: nowrap; }
 #ducks .duck svg { width: 52px; height: 60px; filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.35)); }
-#ducks .dk-ideas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px clamp(24px, 3vw, 48px); margin-top: clamp(20px, 2.4vw, 30px); padding-top: clamp(18px, 2.2vw, 26px); border-top: 1px solid rgba(255, 255, 255, 0.09); }
+#ducks .dk-ideas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px clamp(24px, 3vw, 48px); margin-top: clamp(20px, 2.4vw, 30px); padding-top: clamp(18px, 2.2vw, 26px); border-top: 1px solid rgba(255, 255, 255, 0.09); }
 #ducks .dk-ideas h3 { margin: 0 0 8px; font-size: 13px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--acc); }
-#ducks .dk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+#ducks .dk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 #ducks .dk-list li { font-size: 15px; line-height: 1.5; }
-#ducks .dk-list b, #ducks .dk-next b { color: var(--acc); font-weight: 600; }
-#ducks .dk-next { grid-column: 1 / -1; margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+#ducks .dk-list b { color: var(--acc); font-weight: 600; }
+#ducks .dk-q { grid-column: 1 / -1; margin: 0 0 2px; font-family: var(--display); font-weight: 560; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.01em; }
 @media (max-width: 860px) { #ducks .dk-head, #ducks .dk-ideas { grid-template-columns: minmax(0, 1fr); } #ducks .duckrow { gap: 8px 6px; } #ducks .duck { width: 56px; } #ducks .duck svg { width: 44px; height: 51px; } }
 
 /* After hours: project cards */
@@ -1118,15 +1116,15 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
           <h2 id="h-ducks">My $3,000 oddly specific setup: five Microducks</h2>
           <p>Small open-source walking robot ducks from Pollen Robotics and Hugging Face, 25 cm tall, with their Dev, Accessory and Charger packs. $2,980 in all.</p>
         </div>
-        <div class="duckrow" role="img" aria-label="Five cartoon ducks in the Microduck colours: the growth duck stands tall while the launch, tour, reels and referee ducks waddle">
+        <div class="duckrow" role="img" aria-label="Five cartoon ducks in the Microduck colours, one standing tall while the others waddle">
         <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><symbol id="dk" viewBox="0 0 64 74"><path d="M20 70h10M34 70h10" stroke="#F29A3D" stroke-width="4" stroke-linecap="round"/><path d="M25 58v12M39 58v12" stroke="#F29A3D" stroke-width="3.5" stroke-linecap="round"/><path d="M9 41 L2 31 L14 36 Z" fill="currentColor"/><ellipse cx="30" cy="46" rx="22" ry="15" fill="currentColor" stroke="rgba(255,255,255,.32)" stroke-width="1.2"/><circle cx="40" cy="22" r="12" fill="currentColor" stroke="rgba(255,255,255,.32)" stroke-width="1.2"/><rect x="32" y="25" width="14" height="15" fill="currentColor"/><path d="M50 19 L62 23 L50 27 Z" fill="#F29A3D"/><circle cx="44" cy="19" r="2.3" fill="#15161A"/><circle cx="44.8" cy="18.2" r="0.7" fill="#fff"/><path d="M16 44 Q30 36 40 47 Q28 54 16 44 Z" fill="rgba(0,0,0,.14)"/></symbol></defs></svg>
-        <figure class="duck tall" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg><figcaption>Growth</figcaption></figure><figure class="duck" style="color:#5A5F6B"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg><figcaption>Launch</figcaption></figure><figure class="duck" style="color:#C8B6F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg><figcaption>On tour</figcaption></figure><figure class="duck" style="color:#A8D4F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg><figcaption>Reels</figcaption></figure><figure class="duck" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg><figcaption>Referee</figcaption></figure>
+        <figure class="duck tall" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#5A5F6B"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#C8B6F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#A8D4F2"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure><figure class="duck" style="color:#EFE4CC"><svg viewBox="0 0 64 74" aria-hidden="true" focusable="false"><use href="#dk"/></svg></figure>
         </div>
       </div>
       <div class="dk-ideas">
-        <div><h3>For growth</h3><ul class="dk-list"><li><b>Growth duck</b> stands tall when India sign-ups beat the daily target.</li><li><b>Launch duck</b> does a victory waddle when a campaign goes live.</li><li><b>Duck on tour</b> at Bengaluru events and campuses: talk to it and it walks.</li><li><b>Duck reels</b> every week, with commentary dictated in Flow.</li></ul></div>
-        <div><h3>For fun</h3><ul class="dk-list"><li><b>Microduck Olympics:</b> sprints, relays and penalty shootouts.</li><li><b>Duck football:</b> two-a-side, the fifth duck referees.</li></ul></div>
-        <p class="dk-next"><b>Later:</b> if Flow opens an API, each duck becomes a desk Jarvis you can talk to in English or Hinglish.</p>
+        <p class="dk-q">What could we do?</p>
+        <div><h3>For work</h3><ul class="dk-list"><li><b>A growth dashboard you can see:</b> the ducks stand tall when India sign-ups beat the daily target and do a victory waddle when a campaign goes live.</li><li><b>Ducks on tour:</b> at Bengaluru events and campuses, people make a duck walk just by talking to it. Flow, explained in five seconds.</li></ul></div>
+        <div><h3>For fun</h3><ul class="dk-list"><li><b>Microduck Olympics:</b> sprints, relays and penalty shootouts between teams.</li><li><b>Duck football:</b> two-a-side with the fifth duck as referee, filmed for a weekly reel.</li></ul></div>
       </div>
     </div>
   </div>
