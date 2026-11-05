@@ -295,16 +295,19 @@ main { overflow-x: clip; }
 .eng { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin: 4px 0 14px; max-width: none; }
 .eng b { font-family: var(--display); font-weight: 560; font-size: clamp(84px, 10vw, 160px); line-height: 0.88; letter-spacing: -0.04em; color: var(--acc); font-variant-numeric: tabular-nums; }
 .eng span { max-width: 14ch; font-size: clamp(16px, 1.3vw, 20px); color: var(--ink-2); }
-#next .place { background: repeating-linear-gradient(90deg, #FFFFFF 0px, #FFE3A6 150px, #E8B44A 300px, #FFE3A6 450px, #FFFFFF 600px); background-size: 600px 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: flowtint 6s linear infinite; }
-@keyframes flowtint { from { background-position: 0 0; } to { background-position: 600px 0; } }
+#next .blk { position: relative; isolation: isolate; }
+#next .blk::before { content: ""; position: absolute; inset: -14% -18%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(5, 6, 14, 0.78), rgba(5, 6, 14, 0.5) 55%, rgba(5, 6, 14, 0) 100%); }
+#next .place { background: linear-gradient(105deg, #FFF4E0 0%, #FFF4E0 42%, #FFFFFF 47%, #FFC95C 50%, #FFFFFF 53%, #FFF4E0 58%, #FFF4E0 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: flowtint 5s cubic-bezier(.45, 0, .2, 1) infinite; }
+@keyframes flowtint { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
 @media (prefers-reduced-motion: reduce) { #next .place { animation: none; } }
 #hul .stats li span { max-width: 22ch; }
 .spacer { height: 70svh; }
 #run .racewrap .beat { min-height: 60svh; }
 @media (min-width: 900px) { .dupe { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 #next .call, #next h2, #next h3 { text-shadow: 0 2px 24px rgba(4, 6, 18, 0.72), 0 1px 4px rgba(4, 6, 18, 0.55); }
-#next .place { filter: drop-shadow(0 3px 18px rgba(4, 6, 18, 0.7)); }
 #next p, #next .kick { text-shadow: 0 1px 14px rgba(4, 6, 18, 0.8); }
+/* the wordmark's fill is see-through (gradient text), so a text-shadow would show through and grey it; shadow it with a filter instead */
+#next .place { text-shadow: none; filter: drop-shadow(0 2px 3px rgba(4, 6, 18, 0.55)) drop-shadow(0 8px 30px rgba(4, 6, 18, 0.6)); }
 #next .carry li { background: rgba(12, 12, 30, 0.68); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.65); }
 .board-acts .btn { box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.75); }
 .board-acts .btn.ghost { background: rgba(12, 12, 30, 0.68); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-color: rgba(255, 255, 255, 0.32); }
