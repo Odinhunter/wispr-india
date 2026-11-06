@@ -833,6 +833,11 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 .spacer.walk { height: 60svh; }
 .spacer.race { height: 40svh; }
 .place.long { max-width: 13ch; font-size: clamp(40px, 6.2vw, 100px); line-height: 0.98; }
+/* gradient text only paints inside its box: pad the box past the ink (tails of g, p, y; tops of accents),
+   and pull it back with negative margins so the layout does not move */
+.place { padding: 0.1em 0.12em 0.26em; margin: calc(10px - 0.1em) -0.12em calc(18px - 0.26em); }
+.place.long { max-width: calc(13ch + 0.24em); }
+#hul .place.long { max-width: calc(100% + 0.24em); }
 #summary.dossier { padding-top: clamp(70px, 9vh, 110px); }
 #summary .hurry { margin-bottom: 44px; }
 #summary .route { margin: 40px 0 56px; }
