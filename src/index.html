@@ -1766,7 +1766,8 @@ const SHOTS = {
   // the fly-in lands as the heading arrives; then a slow drift while the rest of college is read
   college: [{ at: 0.23, pal: 'night', p: [330, 110, 50], l: [420, 30, -380] }, { at: 0.41, pal: 'mday', p: [420, 150, -300], l: CP(0, 0, 12) }, { at: 0.59, p: CP(170, 30, 74), l: CP(0, 0, 16) }, { at: 0.77, p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 1, p: CP(122, 20, 36), l: CP(0, 0, 21) }],
   hul: [
-    { at: 0, env: 'mumbai', pal: 'mday', p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 0.18, env: 'mumbai', pal: 'mday', p: CP(140, 16, 44), l: CP(0, 0, 20) },
+    // starts exactly where college's drift ends (keep these in sync with college's last keyframe)
+    { at: 0, env: 'mumbai', pal: 'mday', p: CP(122, 20, 36), l: CP(0, 0, 21) }, { at: 0.18, env: 'mumbai', pal: 'mday', p: CP(122, 20, 36), l: CP(0, 0, 21) },
     { at: 0.25, env: 'mumbai', pal: 'night', p: CP(230, -100, 320), l: CP(-30, 0, 0), x: { p: CP(290, -160, 720), l: CP(-40, 0, 0) } },
     { at: 0.32, env: 'earth', pal: 'mapnight', p: [-6.7, 30, 30], l: [-6.7, 0, 5.1], n: { p: [-6.7, 18, 20], l: [-6.7, 0, 5.1] } },
     { at: 0.42, p: [5, 86, 56], l: [5, 0, 0] }, { at: 0.8, p: [4, 82, 53], l: [4, 0, -1] },
