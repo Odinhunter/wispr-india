@@ -163,12 +163,12 @@ p { margin: 0 0 16px; max-width: 36em; font-size: clamp(17px, 1.28vw, 20px); lin
 .call { margin: 54px 0 12px; font-family: var(--display); font-weight: 520; font-size: clamp(60px, 9vw, 150px); line-height: 0.95; letter-spacing: -0.03em; }
 
 /* reveals, reading highlight and the opening line */
-.js .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .js .rv.in { opacity: 1; transform: none; }
 .js [data-read] .w { opacity: 0.24; transition: opacity 0.35s ease; }
 .js [data-read] .w.on { opacity: 1; }
 [data-read] .w.k { color: var(--k); }
-.js .hook .hw { display: inline-block; opacity: 0; transform: translateY(0.32em); filter: blur(8px); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.8s ease; }
+.js .hook .hw { display: inline-block; opacity: 0; transform: translateY(0.32em); filter: blur(8px); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s ease; }
 .js .hook .hw.on { opacity: 1; transform: none; filter: none; }
 .js .hero .eyebrow, .js .hero .lede, .js .hero .acts, .js .hero .cue, .js .topbar { opacity: 0; transition: opacity 1.2s ease 0.1s; }
 .js .hero.on .eyebrow, .js .hero.on .lede, .js .hero.on .acts, .js .hero.on .cue, .js body.ready .topbar { opacity: 1; }
@@ -256,7 +256,7 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
 .quote.small-center { margin-top: 34px; }
 .quote.small-center blockquote { font-size: clamp(30px, 3.6vw, 56px); }
 .deck { position: relative; height: clamp(280px, 40vh, 380px); margin: 10px auto 0; max-width: 1100px; outline: none; touch-action: pan-y; }
-.deck-card { position: absolute; left: 50%; top: 0; width: min(560px, 80vw); height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 34px 34px 32px; border-radius: 28px; background: linear-gradient(160deg, rgba(30, 26, 60, 0.84), rgba(10, 10, 24, 0.9)); border: 1px solid var(--line); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); text-align: left; transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.5s; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6); }
+.deck-card { position: absolute; left: 50%; top: 0; width: min(560px, 80vw); height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 34px 34px 32px; border-radius: 28px; background: linear-gradient(160deg, rgba(30, 26, 60, 0.84), rgba(10, 10, 24, 0.9)); border: 1px solid var(--line); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); text-align: left; transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6); }
 .deck-card span { font-size: 13px; font-weight: 720; color: var(--acc); }
 .deck-card b { font-family: var(--display); font-weight: 540; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.02; letter-spacing: -0.02em; }
 .deck-card p { margin: 0; font-size: clamp(16px, 1.25vw, 19px); color: var(--ink-2); }
@@ -281,12 +281,12 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
 .pass-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 18px 0 0; padding-top: 14px; border-top: 1px solid #DEDAD0; }
 .pass-grid dt { font-size: 11.5px; font-weight: 700; color: #6E6B7C; }
 .pass-grid dd { margin: 4px 0 0; font-size: 15px; font-weight: 700; color: #14131C; }
-.pass-stub { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 24px 20px; border-radius: 0 20px 20px 0; background: #F4F2EC; border-left: 2px dashed #C9C5BA; transform-origin: 0 50%; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.7s; }
+.pass-stub { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 24px 20px; border-radius: 0 20px 20px 0; background: #F4F2EC; border-left: 2px dashed #C9C5BA; transform-origin: 0 50%; transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s; }
 .pass-stub p { margin: 0; font-size: 11.5px; font-weight: 700; color: #6E6B7C; }
 .pass-stub b { font-family: var(--display); font-size: 26px; font-weight: 600; line-height: 1.05; color: #14131C; }
 .tear { margin-top: 12px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: #14131C; color: #F4F2EC; font-size: 14px; font-weight: 700; cursor: pointer; }
 .torn .pass-stub { transform: translate(70px, 40px) rotate(16deg); opacity: 0; pointer-events: none; }
-.board-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 26px 0 0; max-width: none; transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.board-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 26px 0 0; max-width: none; transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .torn .board-acts { transform: translateY(-8px); }
 .torn .board-acts .btn.solid { box-shadow: 0 0 0 6px rgba(255, 181, 71, 0.28); }
 @media (max-width: 760px) {
@@ -312,7 +312,7 @@ main { overflow-x: clip; }
 .eng span { max-width: none; font-size: clamp(16px, 1.3vw, 20px); color: var(--ink-2); }
 #next .blk { position: relative; isolation: isolate; }
 #next .blk::before { content: ""; position: absolute; inset: -14% -18%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(5, 6, 14, 0.78), rgba(5, 6, 14, 0.5) 55%, rgba(5, 6, 14, 0) 100%); }
-#next .place { background: linear-gradient(105deg, #FFF4E0 0%, #FFF4E0 42%, #FFFFFF 47%, #FFC95C 50%, #FFFFFF 53%, #FFF4E0 58%, #FFF4E0 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: flowtint 5s cubic-bezier(.45, 0, .2, 1) infinite; }
+#next .place { background: linear-gradient(105deg, #FFF4E0 0%, #FFF4E0 42%, #FFFFFF 47%, #FFC95C 50%, #FFFFFF 53%, #FFF4E0 58%, #FFF4E0 100%); background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: flowtint 5s cubic-bezier(0.6, 0, 0.2, 1) infinite; }
 @keyframes flowtint { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
 @media (prefers-reduced-motion: reduce) { #next .place { animation: none; } }
 .spacer { height: 70svh; }
@@ -571,7 +571,7 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 #plan .fp1-tr > div { padding: 12px 14px; border: 1px solid rgba(255, 253, 238, 0.18); border-radius: 14px; background: rgba(255, 253, 238, 0.08); }
 #plan .fp1-tr .k { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--lav2); color: #2A1D4A; font-size: 12px; font-weight: 750; }
 #plan .fp1-tr p { margin: 8px 0 0; font-size: 14.5px; font-style: italic; line-height: 1.4; color: #F1EEDC; }
-.js #plan .fp1-n .blob { transform: scale(0); transition: transform 1s cubic-bezier(0.2, 1.4, 0.4, 1) 2.1s; }
+.js #plan .fp1-n .blob { transform: scale(0); transition: transform 1s cubic-bezier(0.2, 1.3, 0.4, 1) 2.1s; }
 .js #plan .fp1-t .bars i { height: 0; transition: height 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .js #plan .fp1-t .bars i:nth-child(1) { transition-delay: 2.25s; } .js #plan .fp1-t .bars i:nth-child(2) { transition-delay: 2.4s; } .js #plan .fp1-t .bars i:nth-child(3) { transition-delay: 2.55s; }
 .js #plan .seen .fp1-n .blob { transform: scale(1); }
@@ -839,9 +839,9 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 .racewrap .beat { min-height: 36svh; }
 .spacer { height: 10svh; }
 .spacer.short { height: 75svh; }
-.spacer.trip { height: 150svh; }
+.spacer.trip { height: 210svh; }
 .spacer.walk { height: 60svh; }
-.spacer.race { height: 40svh; }
+.spacer.race { height: 135svh; }
 .place.long { max-width: 13ch; font-size: clamp(40px, 6.2vw, 100px); line-height: 0.98; }
 /* gradient text only paints inside its box: pad the box past the ink (tails of g, p, y; tops of accents),
    and pull it back with negative margins so the layout does not move */
@@ -882,25 +882,33 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 .hul-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); }
 .hul-hold { height: 235svh; }
 html.no-gl .hul-hold { height: 0; }
+.bx.hul-facts { display: none; gap: 12px 26px; margin-top: 16px; }
+.bx.hul-facts b { color: #FFD27A; font-size: clamp(30px, 8vw, 40px); }
+.bx.hul-facts span { margin-top: 4px; font-size: 13.5px; }
+html.no-tags .bx.hul-facts, html.no-gl .bx.hul-facts { display: flex; }
 /* the Bain chapter: each part of the story holds still while the globe acts it out */
 #bain .beat.bain-first { padding-bottom: 0; }
 .bain-pin { margin-top: clamp(28px, 5vh, 56px); }
 .bain-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); }
 .bain-hold.ha { height: 70svh; }
-.bain-hold.hb { height: 230svh; }
+.bain-hold.hb { height: 170svh; }
 .bain-hold.hc { height: 150svh; }
 html.no-gl .bain-hold { height: 0; }
+@media (prefers-reduced-motion: reduce) { .bain-hold.ha, .bain-hold.hb, .bain-hold.hc { height: 30svh; } .hul-hold { height: 60svh; } }
 .bx { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 22px 0 0; padding: 0; list-style: none; }
 .bx b { display: block; font-family: var(--display); font-weight: 560; font-size: clamp(36px, 3.6vw, 56px); line-height: 1; letter-spacing: -0.02em; color: #7FE3FF; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bx span { display: block; margin-top: 8px; font-size: 15.5px; line-height: 1.35; color: var(--ink-2); max-width: 20ch; }
 .bx.old b { color: #FFB86B; }
-.bx.big { gap: 22px 46px; margin-top: 14px; }
-.bx.big b { font-size: clamp(44px, 5vw, 82px); letter-spacing: -0.03em; color: var(--ink); }
+/* three fixed columns: each number holds the width of its final value, so nothing shifts or wraps while it counts */
+.bx.big { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 clamp(18px, 3vw, 46px); margin-top: 14px; }
+.bx.big b { font-size: clamp(38px, 4.6vw, 76px); letter-spacing: -0.03em; color: var(--ink); }
+.bx.big b::after { content: attr(data-w); display: block; height: 0; overflow: hidden; visibility: hidden; }
+.bx.big span { max-width: 13ch; }
 .bx.big li:nth-child(2) b { color: #FFD27A; }
 .bx.big li:first-child b { color: #7FE3FF; }
 @media (max-height: 500px) { .hul-pin > .blk, .bain-pin > .blk { top: calc(var(--top) + 4px); } }
 /* where the text column reaches the map, each paragraph carries a soft dark backing so the light behind it never fights the words */
-@media (max-width: 1180px), (max-height: 500px) { #hul .blk > p[data-read], #hul .blk > .eng, #hul .blk > .label, .bain-pin .blk > .pf, .bain-pin .blk > .bx, .bain-pin .blk > .label, #nights .blk > p[data-read], #run .blk > p[data-read], #college .blk > p[data-read] { position: relative; isolation: isolate; } #hul .blk > p[data-read]::before, #hul .blk > .eng::before, #hul .blk > .label::before, .bain-pin .blk > .pf::before, .bain-pin .blk > .bx::before, .bain-pin .blk > .label::before, #nights .blk > p[data-read]::before, #run .blk > p[data-read]::before, #college .blk > p[data-read]::before { content: ""; position: absolute; inset: -12px -14px; z-index: -1; pointer-events: none; border-radius: 18px; background: rgba(5, 6, 14, 0.66); filter: blur(12px); } }
+@media (max-width: 1180px), (max-height: 500px) { #hul .blk > p[data-read], #hul .blk > .eng, #hul .blk > .label, #hul .blk > .bx, .bain-pin .blk > .pf, .bain-pin .blk > .bx, .bain-pin .blk > .label, #nights .blk > p[data-read], #run .blk > p[data-read], #college .blk > p[data-read] { position: relative; isolation: isolate; } #hul .blk > p[data-read]::before, #hul .blk > .eng::before, #hul .blk > .label::before, #hul .blk > .bx::before, .bain-pin .blk > .pf::before, .bain-pin .blk > .bx::before, .bain-pin .blk > .label::before, #nights .blk > p[data-read]::before, #run .blk > p[data-read]::before, #college .blk > p[data-read]::before { content: ""; position: absolute; inset: -12px -14px; z-index: -1; pointer-events: none; border-radius: 18px; background: rgba(5, 6, 14, 0.66); filter: blur(12px); } }
  }
 @keyframes dk-waddle { from { transform: rotate(-3deg); } to { transform: rotate(3deg) translateY(-3px); } }
 #ducks .beat.dk-one { justify-content: center; padding-inline: clamp(16px, 4vw, 72px); }
@@ -1054,6 +1062,7 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
       <p class="label rv">What happened</p>
       <p class="eng rv"><b class="engv">+20%</b><span>engagement on the new line</span></p>
       <p class="rv" data-read>In 2020, I couldn’t explain why one post worked and the next one didn’t. Four years later, I finally could. Engagement went up because the campaign said what customers needed to hear, in words they already used.</p>
+      <ul class="bx hul-facts rv" aria-label="15+ creators, 4 concepts tested, 70+ interviews conducted"><li aria-hidden="true"><b>15+</b><span>Creators</span></li><li aria-hidden="true"><b>4</b><span>Concepts Tested</span></li><li aria-hidden="true"><b>70+</b><span>Interviews Conducted</span></li></ul>
     </div>
     <div class="hul-hold" aria-hidden="true"></div>
   </div>
@@ -1095,9 +1104,9 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
     <div class="blk left">
       <p class="label rv">What changed</p>
       <ul class="bx big rv" aria-label="The portal in numbers: 50% savings in time, $80K saved every year, 70+ offices on one standard">
-        <li aria-hidden="true"><b class="bxt">50%</b><span>savings in time</span></li>
-        <li aria-hidden="true"><b class="bxs">$80K</b><span>saved every year</span></li>
-        <li aria-hidden="true"><b class="bxf">70+</b><span>offices on one standard</span></li>
+        <li aria-hidden="true"><b class="bxt" data-w="50%">50%</b><span>savings in time</span></li>
+        <li aria-hidden="true"><b class="bxs" data-w="$80K">$80K</b><span>saved every year</span></li>
+        <li aria-hidden="true"><b class="bxf" data-w="70+">70+</b><span>offices on one standard</span></li>
       </ul>
     </div>
     <div class="bain-hold hc" aria-hidden="true"></div>
@@ -1786,9 +1795,9 @@ const SHOTS = {
     Object.assign({ bm: 't1', ez: 1 }, GLOBE(170, 305, 0)), Object.assign({ bm: 'a1' }, GLOBE(158, 322, -26)), Object.assign({ bm: 'x0' }, GLOBE(150, 312, -14)), Object.assign({ bm: 'x1' }, GLOBE(134, 300, 0)), Object.assign({ bm: 's1' }, GLOBE(150, 306, 8)), Object.assign({ at: 1 }, GLOBE(180, 325, 0))],
   run: [
     Object.assign({ at: 0, env: 'earth', pal: 'space' }, GLOBE(180, 325, 0)),
-    { at: 0.34, env: 'earth', pal: 'space', ez: 1, p: [0, 7, 121], l: [0, -32.8, 76.1], x: { p: [0, -18, 92.6], l: [0, -32.8, 76.1] } },
-    { at: 0.46, env: 'ggn', pal: 'race', p: [0, 160, -300], l: [0, 0, -700], n: { p: [0, 420, -120], l: [0, 0, -700] } },
-    { at: 0.6, p: [0, 10, -560], l: [0, 6, -1050] }, { at: 0.94, p: [0, 10, -872], l: [0, 6, -1050] }, { at: 1, p: [0, 9, -925], l: [8, 6, -1060] }],
+    { at: 0.2, env: 'earth', pal: 'space', ez: 1, p: [0, 7, 121], l: [0, -32.8, 76.1], x: { p: [0, -18, 92.6], l: [0, -32.8, 76.1] } },
+    { at: 0.27, env: 'ggn', pal: 'race', p: [0, 160, -300], l: [0, 0, -700], n: { p: [0, 420, -120], l: [0, 0, -700] } },
+    { at: 0.36, p: [0, 10, -560], l: [0, 6, -1050] }, { at: 0.94, p: [0, 10, -872], l: [0, 6, -1050] }, { at: 1, p: [0, 9, -925], l: [8, 6, -1060] }],
   nights: [
     { at: 0, env: 'ggn', pal: 'race', p: [0, 9, -925], l: [8, 6, -1060] },
     { at: 0.16, pal: 'ggndusk', p: [4, 14, -940], l: [WX, WY + 1.5, WZ] },
@@ -1802,9 +1811,9 @@ const SHOTS = {
     { at: 0.36, p: [WX + 0.3, WY + 1.7, WZ + 4], l: [WX, WY + 1.3, WZ - 2] },
     { at: 0.5, p: [WX, WY + 2.6, WZ + 18], l: [WX, WY + 1.5, WZ], x: { p: [WX, WY + 9, WZ + 60], l: [WX, WY + 1, WZ] } },
     { at: 0.58, env: 'earth', pal: 'mapnight', p: [0.05, 20, 4], l: [0.05, 0, -11.3], n: { p: [0.05, 13, -3], l: [0.05, 0, -11.3] } },
-    { at: 0.68, pal: 'mapday', p: [3, 70, 46], l: [3, 0, 0] },
-    { at: 0.77, pal: 'mapday', p: [1.4, 30, 36], l: [0.95, 0, 15.8] },
-    { at: 0.85, pal: 'mapday', p: [0.95, 13, 25], l: [0.95, 0, 15.8], x: { p: [0.95, 6, 20.5], l: [0.95, 0, 15.8] } },
+    { at: 0.69, pal: 'mapday', p: [3, 70, 46], l: [3, 0, 0] },
+    { at: 0.79, pal: 'mapday', p: [1.4, 30, 36], l: [0.95, 0, 15.8] },
+    { at: 0.86, pal: 'mapday', p: [0.95, 13, 25], l: [0.95, 0, 15.8], x: { p: [0.95, 6, 20.5], l: [0.95, 0, 15.8] } },
     { at: 0.92, env: 'blr', pal: 'morning', p: [-14, 3.1, 13.8], l: [8, 1.5, -4], n: { p: [-8, 34, 40], l: [14, 0, -10] } },
     { at: 1, p: [0, 3.2, 14.0], l: [22, 1.6, -4] }],
   ducks: [{ at: 0, env: 'blr', pal: 'morning', p: [0, 3.2, 14.0], l: [22, 1.6, -4] }, { at: 1, p: [6, 3.15, 13.9], l: [28, 1.7, -4] }],
@@ -2223,7 +2232,7 @@ const STATE = {
   earth: () => {
     const h = sp.hul || 0, b = sp.bain || 0, r = sp.run || 0, nx = sp.next || 0, TAU = Math.PI * 2, z = { t: 0, spread: 0, net: 0, day: 0, lm: 0, ld: 0, lb: 0, lift: 0, ring: 0, fuse: 0, merge: 0, hg: 0, hl: 0, hop: 0, tv: 0, ti: 0, tr: 0, g1: 0, g2: 0, lines: 0, rot: 0, onl: 0, cut: 0, scan: 0, cl: 0, nw: 0, gold: 0, cop: 0, face: 0 };
     if (nx > 0) return Object.assign(z, { day: sstep(0.58, 0.68, nx), ld: sstep(0.56, 0.6, nx) * (1 - sstep(0.66, 0.71, nx)), lb: sstep(0.75, 0.81, nx) });
-    if (r > 0) return Object.assign(z, { t: 1, g1: 1, onl: 1, cut: 1, scan: 1, g2: 1.35, nw: 1, gold: 1, cop: 1 - sstep(0.05, 0.2, r), lines: 1 - sstep(0.2, 0.32, r), face: GLOBE_FACE });
+    if (r > 0) return Object.assign(z, { t: 1, g1: 1, onl: 1, cut: 1, scan: 1, g2: 1.35, nw: 1, gold: 1, cop: 1 - sstep(0.03, 0.12, r), lines: 1 - sstep(0.12, 0.19, r), face: GLOBE_FACE });
     if (b > 0) { const T = bainT(b), q = BM.t0 / 0.24; return Object.assign(z, { t: sstep(BM.t0, BM.t1, b), g1: T.g, onl: T.onl, cut: T.cut, scan: T.scan, g2: T.scan * 1.35, cl: T.g * (1 - T.rw), nw: T.nw, gold: T.gold, cop: sstep(BM.t1, BM.a0, b), lines: 1, face: GLOBE_FACE * sstep(BM.t0, BM.t1, b), rot: -0.5 * sstep(BM.a0, lerp(BM.a0, BM.a1, 0.55), b) + 0.5 * sstep(lerp(BM.a0, BM.a1, 0.45), BM.a1 + (BM.o1 - BM.a1) * 0.6, b), spread: 1.07, net: 1 - sstep(0.1 * q, 0.22 * q, b), lift: 1 - sstep(0.02 * q, 0.2 * q, b), ring: 1, fuse: 1, merge: 1, hg: 1.3, hop: 1 - sstep(0.02 * q, 0.18 * q, b), tr: 1 - sstep(0.01 * q, 0.1 * q, b) }); }
     const M = HM, g = 1.3 * sstep(M.l0, M.e0, h), gather = lerp(M.f1, M.l0, 0.6);
     return Object.assign(z, { spread: HUL_SPREAD(g), net: 1, lm: sstep(0.31 * M.k, 0.34 * M.k, h) * (1 - sstep(M.l0, lerp(M.l0, M.e0, 0.2), h)), ring: clamp((h - M.r0) / (M.r1 - M.r0), 0, 1), fuse: sstep(M.f0, gather, h), merge: sstep(0, 0.14, g), hg: g, hl: (g > 0.001 ? 1 : 0) * (1 - sstep(M.e0, lerp(M.e0, M.e1, 0.6), h)), lift: sstep(M.e0, M.e1, h), hop: 1, tv: sstep(lerp(M.r0, M.r1, 0.55), M.r1, h) * (1 - sstep(M.f0, M.f1, h)), ti: sstep(lerp(M.f1, M.l0, 0.3), gather, h) * (1 - sstep(lerp(gather, M.l0, 0.7), M.l0 + (M.e0 - M.l0) * 0.05, h)), tr: sstep(0.62, 0.86, g) });
@@ -2250,7 +2259,7 @@ function hulMarks(s) {
 }
 // the same for the bain chapter: the pins set the acts, and the words of the fix cue the chains, the cut and the scan
 const BM = { t0: 0.1, t1: 0.2, a0: 0.25, a1: 0.4, o0: 0.45, o1: 0.48, x0: 0.5, x1: 0.6, s0: 0.62, s1: 0.75, w0: 0.8, w1: 0.84, n0: 0.84, n1: 0.95 };
-const bainT = (b) => { const M = BM, lin = (a, z) => clamp((b - a) / Math.max(1e-5, z - a), 0, 1); return { g: lin(M.a0, M.a1), onl: sstep(M.o0, M.o1, b), cut: lin(M.x0, M.x1), scan: lin(M.s0, M.s1), rw: sstep(M.w0, M.w1, b), nw: sstep(M.n0, M.n1, b), gold: sstep(M.w1, M.n1, b) }; };
+const bainT = (b) => { if (REDUCED) return { g: 1, onl: 1, cut: 1, scan: 1, rw: 1, nw: 1, gold: 1 }; const M = BM, lin = (a, z) => clamp((b - a) / Math.max(1e-5, z - a), 0, 1); return { g: lin(M.a0, M.a1), onl: sstep(M.o0, M.o1, b), cut: lin(M.x0, M.x1), scan: lin(M.s0, M.s1), rw: sstep(M.w0, M.w1, b), nw: sstep(M.n0, M.n1, b), gold: sstep(M.w1, M.n1, b) }; };
 function bainMarks(s) {
   const sy = window.scrollY, span = s.d1 - s.d0, f = (y) => clamp((y - s.d0) / span, 0, 1), gap = (v) => (v * VH) / span, pins = $$('.bain-pin').map((el) => { const t = el.getBoundingClientRect().top + sy, blk = el.firstElementChild, st = parseFloat(getComputedStyle(blk).top) || 0; return [t - st, t + el.offsetHeight - blk.offsetHeight - st]; }), [A, B, C] = pins, M = BM, reads = Text.reads.filter((r) => r.bain);
   M.t0 = gap(1.0); M.a0 = f(A[0]) - gap(0.08); M.t1 = Math.min(gap(1.65), M.a0 - gap(0.02)); M.a1 = f(A[1]) - gap(0.06);
@@ -2259,6 +2268,7 @@ function bainMarks(s) {
   M.w0 = Math.max(f(C[0]) - gap(0.28), M.s1 + gap(0.03)); const room = Math.min(1, (0.97 - M.w0) / gap(1.0)); M.w1 = M.w0 + gap(0.4) * room; M.n0 = M.w1 - gap(0.04) * room; M.n1 = M.n0 + gap(0.64) * room;
 }
 function measure() { const pfm = window.PlanFX; if (pfm && pfm.ready) pfm.measure();
+  document.documentElement.classList.toggle('no-tags', MOBILE || !!World.portrait);
   VH = window.innerHeight; KF = [];
   SECS.forEach((s, i) => { const r = s.el.getBoundingClientRect(); s.top = r.top + window.scrollY; s.h = s.el.offsetHeight; s.d0 = Math.max(0, s.top - VH * 0.9); s.d1 = Math.max(s.d0 + 1, s.top + s.h - VH * 0.9); if (s.key === 'hul') hulMarks(s); if (s.key === 'bain') bainMarks(s); let env = ENV0[s.key], pal = PAL0[s.key]; const small = MOBILE || World.portrait; SHOTS[s.key].forEach((k) => { env = k.env || env; pal = k.pal || pal; const alt = small && (!World.portrait && k.ml ? k.ml : k.m), at = k.hm ? HM[k.hm] : k.bm ? BM[k.bm] * (k.bk || 1) : s.key === 'hul' && k.at < 0.4 ? k.at * HM.k : k.at; KF.push({ y: s.d0 + at * (s.d1 - s.d0), ez: k.ez, p: alt ? alt.p : k.p, l: alt ? alt.l : k.l, x: k.x, n: k.n, env, pal, s: i, sm: SMOOTH.has(s.key) }); }); });
   const sum = $('#summary'); World.sumTop = sum ? sum.getBoundingClientRect().top + window.scrollY : 1e9;
@@ -2281,7 +2291,7 @@ function sample(y) {
   const z = KF[KF.length - 1]; return { a: z, b: z, q: 0 };
 }
 let skyOn = null;
-function progress(y) { SECS.forEach((s) => { const v = (y - s.d0) / (s.d1 - s.d0); spr[s.key] = v; sp[s.key] = clamp(v, 0, 1); }); const sky = sp.bain > BM.t1 && !(sp.run > 0.34) ? '1' : ''; if (sky !== skyOn) { skyOn = sky; document.body.dataset.sky = sky; } const pf = window.PlanFX; if (pf && pf.ready) pf.update(y); }
+function progress(y) { SECS.forEach((s) => { const v = (y - s.d0) / (s.d1 - s.d0); spr[s.key] = v; sp[s.key] = clamp(v, 0, 1); }); const sky = sp.bain > BM.t1 && !(sp.run > 0.2) ? '1' : ''; if (sky !== skyOn) { skyOn = sky; document.body.dataset.sky = sky; } const pf = window.PlanFX; if (pf && pf.ready) pf.update(y); }
 const Pointer = { x: 0, y: 0 };
 window.addEventListener('pointermove', (e) => { Pointer.x = (e.clientX / window.innerWidth - 0.5) * 2; Pointer.y = (e.clientY / window.innerHeight - 0.5) * 2; }, { passive: true });
 let introT0 = 0;
@@ -2290,7 +2300,7 @@ function frameWorld(now, dt, sy) {
   const smp = sample(sy); if (!smp) return;
   const A = smp.a, B = smp.b, q = smp.q, cross = A !== B && A.env !== B.env;
   W.ip = REDUCED ? 1 : clamp((now - introT0) / 4.6, 0, 1);
-  const rn = sp.run || 0, gk = rn > 0 ? 1 - sstep(0.34, 0.46, rn) : sstep(BM.t0, BM.t1, sp.bain || 0), lens = gk * (rn > 0 ? 1 - sstep(0, 0.34, rn) : 1), wide = W.w / W.h;
+  const rn = sp.run || 0, gk = rn > 0 ? 1 - sstep(0.2, 0.27, rn) : sstep(BM.t0, BM.t1, sp.bain || 0), lens = gk * (rn > 0 ? 1 - sstep(0, 0.2, rn) : 1), wide = W.w / W.h;
   W.setLens(W.portrait ? 0 : lens * (MOBILE ? 0.3 : wide < 1.4 ? 0.23 : 0.2), W.portrait ? lens * 0.27 : 0);
   const sec = SECS[(q > 0.5 ? B : A).s], sideT = W.portrait || MOBILE ? 0 : (sec.side === 'left' ? 1 : sec.side === 'right' ? -1 : 0) * (1 - gk);
   W.side += (sideT - W.side) * (1 - Math.pow(1 - 0.06, dt * 60));
@@ -2323,7 +2333,7 @@ function poseAt(y) {
 /* ============================================================
    page: active section, progress, race counter, engagement
    ============================================================ */
-const bxl = $('.bxl'), bxm = $('.bxm'), bxo = $('.bxo'), bxc = $('.bxc'), bxt = $('.bxt'), bxs = $('.bxs'), bxf = $('.bxf'), put = (el, v) => { if (el._v !== v) { el._v = v; el.textContent = v; } };
+const bxl = $('.bxl'), bxm = $('.bxm'), bxo = $('.bxo'), bxc = $('.bxc'), bxt = $('.bxt'), bxs = $('.bxs'), bxf = $('.bxf'), put = (el, v) => { if (el._v !== v) { el._v = v; el.textContent = v; } }, wake = (el, q) => { const o = (0.14 + 0.86 * q).toFixed(2); if (el._o !== o) { el._o = o; el.style.opacity = o; } };
 const kmv = $('.kmv'), kmc = $('.kmc'), engv = $('.engv'), prog = $('.prog i'), navA = $$('.nav a');
 let curSec = -1;
 function framePage(sy) {
@@ -2331,10 +2341,10 @@ function framePage(sy) {
   if (idx !== curSec) { curSec = idx; document.body.dataset.side = idx >= 0 ? SECS[idx].side : 'none'; const id = idx >= 0 ? SECS[idx].id : ''; navA.forEach((a) => a.classList.toggle('cur', a.getAttribute('href') === '#' + id)); }
   const end = World.sumTop || 1, pv = clamp(sy / Math.max(1, end - VH), 0, 1); if (prog._v !== pv) { prog._v = pv; prog.style.transform = `scaleX(${pv.toFixed(4)})`; }
   const r = sp.run || 0;
-  if (kmc) { const o = (sstep(0.26, 0.32, r) * (1 - sstep(0.92, 0.98, r))).toFixed(3); if (kmc._o !== o) { kmc._o = o; kmc.style.opacity = o; } }
-  if (kmv) { const s = (21.1 * clamp((r - 0.56) / 0.38, 0, 1)).toFixed(1); if (kmv._s !== s) { kmv._s = s; kmv.textContent = s; } }
-  if (bxm) { const T = bainT(sp.bain || 0), all = REDUCED || !World.ok, g = all ? 1 : T.g, c = all ? 1 : clamp(T.cut / 0.7, 0, 1), n = all ? 1 : T.nw, k = (x, a, z) => clamp((x - a) / (z - a), 0, 1); put(bxm, g >= 0.995 ? '3 to 4 months' : 'Month ' + Math.max(1, Math.ceil(g * 3.5))); put(bxo, g >= 0.995 ? '70+' : String(Math.round(g * 70))); put(bxc, c <= 0 ? '70+' : String(Math.round(lerp(70, 1, c)))); put(bxl, c >= 1 ? 'portal, replacing 70+ email chains' : 'email chains'); put(bxt, Math.round(50 * k(n, 0, 0.8)) + '%'); put(bxs, '$' + Math.round(80 * k(n, 0.1, 0.9)) + 'K'); put(bxf, n >= 1 ? '70+' : String(Math.round(70 * k(n, 0.2, 1)))); }
-  if (engv) { const v = '+' + (REDUCED || !World.ok ? 20 : Math.round(20 * sstep(HM.e0, HM.e1, sp.hul || 0))) + '%'; if (engv._v !== v) { engv._v = v; engv.textContent = v; } }
+  if (kmc) { const o = (sstep(0.3, 0.36, r) * (1 - sstep(0.95, 0.99, r))).toFixed(3); if (kmc._o !== o) { kmc._o = o; kmc.style.opacity = o; } }
+  if (kmv) { const s = (21.1 * clamp((r - 0.36) / 0.58, 0, 1)).toFixed(1); if (kmv._s !== s) { kmv._s = s; kmv.textContent = s; } }
+  if (bxm) { const T = bainT(sp.bain || 0), all = REDUCED || !World.ok, g = all ? 1 : T.g, c = all ? 1 : clamp(T.cut / 0.7, 0, 1), n = all ? 1 : T.nw, k = (x, a, z) => clamp((x - a) / (z - a), 0, 1); put(bxm, g >= 0.995 ? '3 to 4 months' : 'Month ' + Math.max(1, Math.ceil(g * 3.5))); put(bxo, g >= 0.995 ? '70+' : String(Math.round(g * 70))); put(bxc, c <= 0 ? '70+' : String(Math.round(lerp(70, 1, c)))); put(bxl, c >= 1 ? 'portal, replacing 70+ email chains' : 'email chains'); put(bxt, Math.round(50 * k(n, 0, 0.8)) + '%'); put(bxs, '$' + Math.round(80 * k(n, 0.1, 0.9)) + 'K'); put(bxf, n >= 1 ? '70+' : String(Math.round(70 * k(n, 0.2, 1)))); wake(bxt, k(n, 0, 0.12)); wake(bxs, k(n, 0.1, 0.22)); wake(bxf, k(n, 0.2, 0.32)); }
+  if (engv) { const all = REDUCED || !World.ok, h = sp.hul || 0; put(engv, '+' + (all ? 20 : Math.round(20 * sstep(HM.e0, HM.e1, h))) + '%'); wake(engv, all ? 1 : sstep(HM.e0, lerp(HM.e0, HM.e1, 0.14), h)); }
   const pt = sy + 64 >= (World.sumTop || 1e9); if (document.body._pt !== pt) { document.body._pt = pt; document.body.classList.toggle('paper-top', pt); }
 }
 
