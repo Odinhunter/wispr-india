@@ -277,8 +277,7 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
 .route i { position: relative; height: 2px; background: repeating-linear-gradient(90deg, #B4B1C0 0 8px, transparent 8px 14px); }
 .route i em { position: absolute; top: -5px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: #FF8F5A; animation: fly 3.2s ease-in-out infinite; }
 @keyframes fly { 0% { left: 0; opacity: 1; } 70% { left: calc(100% - 12px); opacity: 1; } 100% { left: calc(100% - 12px); opacity: 0; } }
-.via { margin: 8px 0 14px; max-width: none; font-size: 13px; color: #5E5C6C; }
-.pass-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding-top: 14px; border-top: 1px solid #DEDAD0; }
+.pass-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 18px 0 0; padding-top: 14px; border-top: 1px solid #DEDAD0; }
 .pass-grid dt { font-size: 11.5px; font-weight: 700; color: #6E6B7C; }
 .pass-grid dd { margin: 4px 0 0; font-size: 15px; font-weight: 700; color: #14131C; }
 .pass-stub { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 24px 20px; border-radius: 0 20px 20px 0; background: #F4F2EC; border-left: 2px dashed #C9C5BA; transform-origin: 0 50%; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.7s; }
@@ -1286,7 +1285,6 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
           <div class="pass-main">
             <p class="pass-top"><span>Boarding pass</span><span>Class: growth</span></p>
             <div class="route"><div><b>DEL</b><span>New Delhi</span></div><i aria-hidden="true"><em></em></i><div class="to"><b>BLR</b><span>Bangalore</span></div></div>
-            <p class="via">From Gurugram, where I live and work now</p>
             <dl class="pass-grid"><div><dt>Passenger</dt><dd>Ishan Kabra</dd></div><div><dt>Destination</dt><dd>Wispr Flow, India growth</dd></div><div><dt>Boarding</dt><dd>When you say go</dd></div></dl>
           </div>
           <div class="pass-stub"><p>Gate</p><b>Your inbox</b><button class="tear" type="button" aria-expanded="false">Tear to board</button></div>
