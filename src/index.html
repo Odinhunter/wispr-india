@@ -66,6 +66,12 @@ body.paper-top .topbar::before, body.flow-top .topbar::before { opacity: 0; }
 @media (max-width: 1280px) { .nav { gap: 13px; } .nav a { font-size: 13px; } }
 .nav a.cur { box-shadow: inset 0 -2px 0 var(--acc); }
 .tb-sum { opacity: 1; padding: 9px 16px; border: 1.5px solid var(--line); border-radius: 999px; }
+.snap-next { position: fixed; z-index: 40; left: 50%; bottom: 22px; display: grid; place-items: center; width: 44px; height: 44px; margin-left: -22px; padding: 0; border: 1px solid rgba(244, 240, 232, 0.22); border-radius: 50%; background: rgba(10, 11, 20, 0.55); color: #F4F0E8; cursor: pointer; opacity: 0; transform: translateY(10px); pointer-events: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: opacity 0.35s, transform 0.35s, background 0.2s; }
+.snap-next.on { opacity: 0.8; transform: none; pointer-events: auto; }
+.snap-next:hover, .snap-next:focus-visible { opacity: 1; background: rgba(10, 11, 20, 0.8); }
+.snap-next svg { width: 18px; height: 18px; animation: snapNudge 2.4s ease-in-out infinite; }
+@keyframes snapNudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) { .snap-next svg { animation: none; } }
 .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(244, 240, 232, 0.08); }
 .prog i { position: absolute; inset: 0; background: var(--acc); transform-origin: 0 50%; transform: scaleX(0); }
 body.paper-top .topbar { background: var(--p-bg); color: var(--p-ink); box-shadow: 0 1px 0 var(--p-line); }
@@ -491,7 +497,7 @@ body.flow-top .topbar { background: rgba(254, 252, 236, 0.95); color: #1D1C17; b
 body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 
 /* desktop: a pinned stage, a cream circle, panels that slide sideways */
-#plan.horiz { height: calc(var(--vh, 100vh) * 3.64); }
+#plan.horiz { height: var(--plan-h, calc(var(--vh, 100vh) * 5.2)); }
 #plan.horiz .fl-stage { position: sticky; top: 0; height: var(--vh, 100vh); overflow: hidden; }
 #plan.horiz .fl-cream { position: absolute; inset: 0; clip-path: circle(var(--r, 0px) at 50% calc(100% - 44px)); }
 #plan.horiz .fl-track { display: flex; height: 100%; width: 600vw; will-change: transform; }
@@ -2464,6 +2470,7 @@ function measure() { const pfm = window.PlanFX; if (pfm && pfm.ready) pfm.measur
   VH = TOUCH ? VH0 : window.innerHeight; KF = [];
   SECS.forEach((s, i) => { const r = s.el.getBoundingClientRect(); s.top = r.top + window.scrollY; s.h = s.el.offsetHeight; s.d0 = Math.max(0, s.top - VH * 0.9); s.d1 = Math.max(s.d0 + 1, s.top + s.h - VH * 0.9); if (s.key === 'hul') hulMarks(s); if (s.key === 'bain') bainMarks(s); let env = ENV0[s.key], pal = PAL0[s.key]; const small = MOBILE || World.portrait; SHOTS[s.key].forEach((k) => { env = k.env || env; pal = k.pal || pal; const alt = small && (!World.portrait && k.ml ? k.ml : k.m), at = k.hm ? HM[k.hm] : k.bm ? BM[k.bm] * (k.bk || 1) : s.key === 'hul' && k.at < 0.4 ? k.at * HM.k : k.at; KF.push({ y: s.d0 + at * (s.d1 - s.d0), ez: k.ez, p: alt ? alt.p : k.p, l: alt ? alt.l : k.l, x: k.x, n: k.n, env, pal, s: i, sm: SMOOTH.has(s.key) }); }); });
   const sum = $('#summary'); World.sumTop = sum ? sum.getBoundingClientRect().top + window.scrollY : 1e9;
+  const sn = window.Snap; if (sn) sn.build();
 }
 // the Mumbai act flies one continuous path: a centripetal Catmull-Rom spline through its keyframes, with no stops between chapters
 const SMOOTH = new Set(['hero', 'mumbai', 'lockdown', 'college']);
@@ -2551,7 +2558,7 @@ function framePage(sy) {
    boot
    ============================================================ */
 let lenis = null;
-function scrollToY(y, smooth) { if (lenis) lenis.scrollTo(y, smooth ? { duration: 1.6 } : { immediate: true, force: true }); else window.scrollTo({ top: y, behavior: smooth && !REDUCED ? 'smooth' : 'auto' }); }
+function scrollToY(y, smooth) { const sn = window.Snap; if (smooth && sn && sn.on) { sn.glide(y, 1.6, null, false); return; } if (lenis) lenis.scrollTo(y, smooth ? { duration: 1.6 } : { immediate: true, force: true }); else window.scrollTo({ top: y, behavior: smooth && !REDUCED ? 'smooth' : 'auto' }); }
 Text.init(); Deck.init(); Pass.init();
 const intro = document.createElement('div'); intro.className = 'intro'; intro.setAttribute('aria-hidden', 'true'); intro.innerHTML = '<div><b>Ishan Kabra</b><span></span></div>'; document.body.appendChild(intro);
 $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => { const id = a.getAttribute('href').slice(1); const el = id && document.getElementById(id); if (!el) return; e.preventDefault(); if (id === 'plan' && window.PlanFX && window.PlanFX.ready) { window.PlanFX.go(0); return; } if (el.tagName === 'DETAILS') el.open = true; scrollToY(id === 'top' ? 0 : el.getBoundingClientRect().top + window.scrollY - (id !== 'summary' && el.closest('#summary') ? 92 : 0), true); }));
@@ -2565,7 +2572,7 @@ function loop(ms) {
     ft = ft * 0.96 + dw * 0.04; SLOW = ft > (MOBILE ? 0.06 : 0.05);
     if (!World.lowQ && !/qa/.test(location.hash)) { frames++; const fw = MOBILE ? 45 : 120, fl = MOBILE ? 0.05 : 0.036; if (frames > fw && ft > fl && World.post && !World.lowBloom) { World.lowBloom = true; frames = 0; ft = 0.02; } else if (frames > fw && ft > fl) { World.lowQ = true; World.post = false; World.pix = 1; World.r.setPixelRatio(1); Object.values(World.envs).forEach((e) => e.lights.forEach((p) => { p.userData.U.uPix.value = 1; })); World.resize(window.innerWidth, viewH()); } } }
   }
-  Text.frame(sy); framePage(sy);
+  Text.frame(sy); framePage(sy); Snap.tick(performance.now());
   requestAnimationFrame(loop);
 }
 
@@ -2589,10 +2596,10 @@ function flCount(el, instant, dur) {
   requestAnimationFrame(f);
 }
 const PlanFX = {
-  R: 0.3, S: 0.34, E: 0.3, ready: false,
+  R: 0.3, S: 0.6, E: 0.3, HOLD: 0.55, ready: false,
   init() {
     const sec = document.getElementById('plan'); if (!sec) return; this.sec = sec;
-    this.cream = sec.querySelector('.fl-cream'); this.track = sec.querySelector('.fl-track'); this.panels = Array.from(sec.querySelectorAll('.fl-panel')); this.N = this.panels.length;
+    this.cream = sec.querySelector('.fl-cream'); this.track = sec.querySelector('.fl-track'); this.panels = Array.from(sec.querySelectorAll('.fl-panel')); this.N = this.panels.length; this.ins = this.panels.map((p) => p.querySelector('.fl-in'));
     this.pill = sec.querySelector('.fl-pill'); this.ptxt = sec.querySelector('.fl-pill-t'); this.dots = Array.from(sec.querySelectorAll('.fl-dots button')); this.live = sec.querySelector('.fl-live'); this.fits = Array.from(sec.querySelectorAll('.fl-fit'));
     this.cur = -1; this.lastR = -1; this._x = null; this.timers = [];
     this.mq = window.matchMedia('(min-width: 980px) and (min-height: 600px)');
@@ -2608,8 +2615,10 @@ const PlanFX = {
   mode() { this.measure(); },
   measure() { if (!this.ready) return; this.tooShort = false; this.apply(); },
   apply() {
-    this.horiz = this.mq.matches && !REDUCED && !this.tooShort; this.sec.classList.toggle('horiz', this.horiz);
-    if (!this.horiz) { this.track.style.transform = ''; this.cream.style.removeProperty('--r'); this.pill.classList.remove('on', 'moving'); }
+    // touch screens scroll the plan as a stacked page: sideways paging is for wheels and trackpads
+    this.horiz = this.mq.matches && !REDUCED && !this.tooShort && !TOUCH; this.sec.classList.toggle('horiz', this.horiz);
+    if (!this.horiz) { this.track.style.transform = ''; this.cream.style.removeProperty('--r'); this.pill.classList.remove('on', 'moving'); this.sec.style.removeProperty('--plan-h'); this.ins.forEach((el) => { el._d = 0; el.style.transform = ''; el.style.opacity = ''; }); }
+    else this.sec.style.setProperty('--plan-h', `${((1 + this.R + this.N * this.S + this.E) * window.innerHeight).toFixed(0)}px`);
     this.VH = window.innerHeight; this.W = window.innerWidth; this.top = this.sec.getBoundingClientRect().top + window.scrollY;
     this.maxR = Math.hypot(this.W / 2, this.VH) + 60; this._x = null; this.lastR = -1;
     const minS = this.fit();
@@ -2635,9 +2644,11 @@ const PlanFX = {
     const t = (sy - this.top) / this.VH, R = this.R, S = this.S, E = this.E, N = this.N, endP = R + N * S;
     const rev = clamp(t / R, 0, 1), ex = clamp((t - endP) / E, 0, 1), open = flEase(rev) * (1 - flEase(ex));
     const r = open * this.maxR; if (Math.abs(r - this.lastR) > 0.5) { this.lastR = r; this.cream.style.setProperty('--r', `${r.toFixed(1)}px`); }
-    const u = clamp((t - R) / S, 0, N - 0.0001), i = Math.floor(u), f = u - i, hold = 0.55;
+    const u = clamp((t - R) / S, 0, N - 0.0001), i = Math.floor(u), f = u - i, hold = this.HOLD;
     const g = i >= N - 1 || f < hold ? 0 : flEase((f - hold) / (1 - hold)), pos = i + g, x = -pos * this.W;
-    if (this._x !== x) { this._x = x; this.track.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`; }
+    if (this._x !== x) { this._x = x; this.track.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
+      // the content of a sliding panel runs a little ahead of its page and fades, so each page lands with depth
+      this.ins.forEach((el, k) => { const d = clamp(k - pos, -1.5, 1.5), v = Math.abs(d) < 0.002 ? 0 : d; if (el._d === v) return; el._d = v; el.style.transform = v ? `translate3d(${(v * this.W * 0.12).toFixed(1)}px,0,0)` : ''; el.style.opacity = v ? (1 - Math.min(1, Math.abs(v)) * 0.7).toFixed(3) : ''; }); }
     this.pill.classList.toggle('on', t > 0.02 && ex < 0.92);
     this.pill.classList.toggle('moving', (g > 0.02 && g < 0.98) || (rev > 0.02 && rev < 0.98) || (ex > 0.02 && ex < 0.98));
     if (open > 0.45) this.setActive(Math.round(pos));
@@ -2653,8 +2664,10 @@ const PlanFX = {
     if (this.live) this.live.textContent = `Panel ${i + 1} of ${this.N}: ${title}`;
     this.see(i);
   },
+  // the scroll position where panel i rests: the middle of its hold (the last panel has no slide after it)
+  stopY(i) { return this.top + (this.R + i * this.S + (i >= this.N - 1 ? 0.5 : 0.5 * this.HOLD) * this.S) * this.VH; },
   go(i) {
-    if (this.horiz) scrollToY(this.top + (this.R + i * this.S + 0.12 * this.S) * this.VH, true);
+    if (this.horiz) { const sn = window.Snap; if (sn && sn.on) sn.glide(this.stopY(i), 1.1, flEase, true); else scrollToY(this.stopY(i), true); }
     else this.panels[i].scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
   },
   later(ms, fn, I) { if (I) fn(); else setTimeout(fn, ms); },
@@ -2694,10 +2707,162 @@ const PlanFX = {
 };
 window.PlanFX = PlanFX;
 
+/* ============================================================
+   stops: resting points for the scroll. When the wheel goes quiet the page eases onto a nearby one,
+   Space and PageDown step between them, phones settle gently, and the plan turns one panel per gesture
+   ============================================================ */
+const QA = /qa/.test(location.hash);
+const outCubic = (t) => 1 - Math.pow(1 - t, 3), outQuart = (t) => 1 - Math.pow(1 - t, 4);
+const Snap = {
+  all: [], phone: [], on: false, touch: false, gliding: false, locked: false, gid: 0, gt: 0, lastWheel: 0, wheeled: false, dir: 1, lastSettle: 0, drag: false, btnOn: null,
+  pg: { on: false, out: false, lock: false, hist: [], lastT: 0, acc: 0, used: true, dec: false, z0: 0, z1: -1, ys: [] },
+  init() {
+    this.on = !!lenis && !REDUCED && !QA && !TOUCH;
+    this.touch = !!lenis && TOUCH && !REDUCED && !QA;
+    if (this.on) {
+      window.addEventListener('wheel', (e) => this.wheel(e), { capture: true, passive: false });
+      window.addEventListener('keydown', (e) => this.key(e));
+      window.addEventListener('pointerdown', (e) => { if (e.clientX >= document.documentElement.clientWidth) this.drag = true; }, { passive: true });
+      window.addEventListener('pointerup', () => { this.drag = false; }, { passive: true });
+      const b = document.createElement('button'); b.className = 'snap-next'; b.type = 'button'; b.setAttribute('aria-label', 'Next');
+      b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+      b.addEventListener('click', () => this.step(1)); document.body.appendChild(b); this.btn = b;
+    }
+    if (this.touch) {
+      let touching = false, t = 0; this.touched = false;
+      const settle = () => { clearTimeout(t); if (!touching && this.touched) { this.touched = false; this.settleTouch(); } };
+      const up = () => { touching = false; clearTimeout(t); t = setTimeout(settle, 160); };
+      window.addEventListener('touchstart', () => { touching = true; this.touched = true; clearTimeout(t); if (this.gliding) { this.gliding = false; this.gid++; lenis.stop(); lenis.start(); } }, { passive: true });
+      window.addEventListener('touchend', up, { passive: true }); window.addEventListener('touchcancel', up, { passive: true });
+      window.addEventListener('scroll', () => { if (!touching && this.touched) { clearTimeout(t); t = setTimeout(settle, 160); } }, { passive: true });
+      if ('onscrollend' in window) window.addEventListener('scrollend', settle);
+    }
+    // opening a details block changes the page height: re-measure so the scenes and stops line up again
+    if ('ResizeObserver' in window) { let last = document.documentElement.scrollHeight, rt2 = 0; new ResizeObserver(() => { clearTimeout(rt2); rt2 = setTimeout(() => { const h = document.documentElement.scrollHeight; if (Math.abs(h - last) > 2) { last = h; measure(); } }, 200); }).observe(document.body); }
+    this.build();
+  },
+  // stops sit where an animation has just finished: the text fully lit, the map done, the counter landed
+  build() {
+    const sy = window.scrollY, ys = [], sumTop = World.sumTop || 1e9, add = (y, rank) => ys.push({ y: Math.max(0, Math.round(y)), r: rank });
+    add(0, 0);
+    $$('.beat').forEach((b) => {
+      if (b.closest('#summary')) return;
+      const blk = b.querySelector('.blk') || b, rc = blk.getBoundingClientRect(), top = rc.top + sy, h = rc.height, bar = 84;
+      const reads = Text.reads.filter((x) => blk.contains(x.el) && !x.pin && !x.py); let y;
+      if (reads.length) { Text.groups.filter((g) => g.some((x) => reads.includes(x))).forEach((g) => Text.chain(g, sy)); y = Math.max(...reads.map((x) => x.e)); }
+      else y = top + h / 2 - (VH + bar) / 2;
+      // keep the block clear of the top bar, and wholly on screen when it fits
+      y = h + bar + 32 <= VH ? clamp(y, top + h + 32 - VH, top - bar) : top - bar;
+      add(y, 1);
+    });
+    const sec = (k) => SECS.find((x) => x.key === k), at = (sc, m) => sc.d0 + m * (sc.d1 - sc.d0);
+    const hs = sec('hul'); if (hs) ['r1', 'f1', 'l0', 'e1'].forEach((k) => add(at(hs, HM[k]), 0));
+    const bs = sec('bain'); if (bs) { ['o1', 'x1', 's1', 'n1'].forEach((k) => add(at(bs, BM[k]), 0)); $$('.bain-pin').forEach((el) => add(el.getBoundingClientRect().top + sy - (parseFloat(getComputedStyle(el.firstElementChild).top) || 0), 0)); }
+    const rs = sec('run'); if (rs) add(at(rs, 0.945), 1);
+    const pf = window.PlanFX, pg = this.pg; pg.z1 = -1; pg.ys = [];
+    if (pf && pf.ready) {
+      if (pf.horiz) { pg.ys = pf.panels.map((_, i) => pf.stopY(i)); pg.ys.forEach((y) => add(y, 2)); pg.z0 = pf.top + VH * 0.04; pg.z1 = pf.top + (pf.R + pf.N * pf.S + pf.E - 0.04) * VH; }
+      else pf.panels.forEach((el) => add(el.getBoundingClientRect().top + sy, 2));
+    }
+    add(sumTop, 0);
+    ys.sort((a, b) => a.y - b.y);
+    const out = []; ys.forEach((st) => { if (st.y > sumTop + 1) return; const l = out[out.length - 1]; if (l && st.y - l.y < VH * 0.35) { if (st.r > l.r) out[out.length - 1] = st; return; } out.push(st); });
+    this.all = out; this.phone = out.filter((st) => st.r >= 1);
+  },
+  glide(y, dur, easing, lock, cb) {
+    if (!lenis) { window.scrollTo({ top: y, behavior: REDUCED ? 'auto' : 'smooth' }); return; }
+    const id = ++this.gid; this.gliding = true; this.locked = !!lock; this.wheeled = false; clearTimeout(this.gt);
+    const done = () => { if (id !== this.gid) return; this.gid++; this.gliding = false; this.locked = false; this.lastSettle = performance.now(); if (cb) cb(); };
+    this.gt = setTimeout(done, dur * 1000 + 400);
+    lenis.scrollTo(y, { duration: dur, easing: easing || ease, lock: !!lock, force: true, onComplete: done });
+  },
+  next(dir, from) {
+    const sy = from === undefined ? window.scrollY : from, L = this.all;
+    if (dir > 0) return L.find((st) => st.y > sy + 8) || null;
+    for (let i = L.length - 1; i >= 0; i--) if (L[i].y < sy - 8) return L[i];
+    return null;
+  },
+  step(dir) {
+    if (this.pg.on) { if (!this.pg.lock) this.page(dir); return true; }
+    const st = this.next(dir); if (!st) return false;
+    this.glide(st.y, clamp(0.5 + 0.3 * Math.abs(st.y - window.scrollY) / VH, 0.6, 1.3), ease, false); return true;
+  },
+  page(dir) {
+    const pg = this.pg, ys = pg.ys, sy = window.scrollY, i = ys.reduce((b, y, k) => (Math.abs(y - sy) < Math.abs(ys[b] - sy) ? k : b), 0), ni = i + dir;
+    if (ni < 0 || ni >= ys.length) {
+      // past the first or last panel the plan lets go, and the page glides on to the next scene
+      pg.on = false; pg.out = true; this.eat = true; const st = this.next(dir, dir > 0 ? pg.z1 : pg.z0);
+      if (st) this.glide(st.y, clamp(0.6 + 0.3 * Math.abs(st.y - sy) / VH, 0.8, 1.4), ease, true);
+      return;
+    }
+    pg.lock = true; this.glide(ys[ni], 0.85, flEase, true, () => setTimeout(() => { pg.lock = false; }, 250));
+  },
+  wheel(e) {
+    if (e.ctrlKey) return; // pinch-zoom
+    const now = performance.now(), pg = this.pg, k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? VH : 1, dx = e.deltaX * k; let d = e.deltaY * k;
+    if (pg.on && Math.abs(dx) > Math.abs(d)) d = dx;
+    // a new gesture: a pause, or a fresh push after a decaying inertia tail (a trackpad keeps sending its tail for over a second)
+    const a = Math.abs(d), h = pg.hist, avg = h.length ? h.reduce((x, y) => x + y, 0) / h.length : 0;
+    if (now - pg.lastT >= 250 || (pg.dec && a > 15 && a > avg * 1.6)) { h.length = 0; pg.acc = 0; pg.used = false; this.eat = false; }
+    pg.dec = h.length > 0 && a <= h[h.length - 1]; h.push(a); if (h.length > 4) h.shift(); pg.lastT = now;
+    this.lastWheel = now; if (d) this.dir = d > 0 ? 1 : -1;
+    if (!pg.on && this.eat) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    if (!pg.on) { this.wheeled = true; if (this.gliding && !this.locked) { this.gid++; this.gliding = false; } return; }
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (pg.lock || pg.used || this.gliding) return;
+    pg.acc += d; if (Math.abs(pg.acc) < 25) return;
+    pg.used = true; this.page(pg.acc > 0 ? 1 : -1);
+  },
+  key(e) {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+    const t = e.target, tag = t && t.tagName, k = e.key, pg = this.pg;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tag))) return;
+    let dir = 0;
+    if (k === 'PageDown' || (k === ' ' && !e.shiftKey)) dir = 1; else if (k === 'PageUp' || (k === ' ' && e.shiftKey)) dir = -1;
+    else if (pg.on && (k === 'ArrowRight' || k === 'ArrowDown')) dir = 1; else if (pg.on && (k === 'ArrowLeft' || k === 'ArrowUp')) dir = -1;
+    if (!dir || (k === ' ' && /^(BUTTON|A|SUMMARY)$/.test(tag))) return;
+    if (!pg.on && window.scrollY >= (World.sumTop || 1e9) - 2) return; // the short version scrolls like an ordinary page
+    if (this.step(dir)) e.preventDefault();
+  },
+  settleTouch() {
+    const sy = window.scrollY; if (sy >= (World.sumTop || 1e9) - 2) return;
+    let best = null; this.phone.forEach((st) => { if (!best || Math.abs(st.y - sy) < Math.abs(best.y - sy)) best = st; });
+    if (!best) return; const d = Math.abs(best.y - sy); if (d < 3 || d > VH * 0.15) return;
+    this.glide(best.y, 0.45, outCubic, false);
+  },
+  tick(now) {
+    if (!this.on) return; const sy = window.scrollY, pg = this.pg;
+    if (this.btn) { const show = sy > VH * 0.4 && sy < (World.sumTop || 1e9) - VH * 0.6 && !pg.on && !document.body.classList.contains('flow-top'); if (show !== this.btnOn) { this.btnOn = show; this.btn.classList.toggle('on', show); } }
+    // the plan: inside its zone the wheel turns pages, and whoever lands in it is eased onto a panel
+    const inZ = sy >= pg.z0 && sy <= pg.z1;
+    if (!inZ) { pg.on = false; pg.out = false; }
+    else if (!pg.on && !pg.out && !this.gliding && !this.drag) {
+      pg.on = true; pg.used = true; const ys = pg.ys, i = ys.reduce((b, y, k) => (Math.abs(y - sy) < Math.abs(ys[b] - sy) ? k : b), 0);
+      if (Math.abs(ys[i] - sy) > 2) { pg.lock = true; this.glide(ys[i], 0.7, flEase, true, () => setTimeout(() => { pg.lock = false; }, 200)); }
+      return;
+    }
+    if (pg.on) return;
+    // everywhere else: once the wheel goes quiet, ease onto a stop that's close by
+    if (!this.wheeled || this.gliding || this.drag || now - this.lastWheel < 180 || now - this.lastSettle < 600) return;
+    this.wheeled = false;
+    // decide from where the smooth scroll is heading, and glide there straight from where it is now
+    const ty = typeof lenis.targetScroll === 'number' ? lenis.targetScroll : sy;
+    if (ty >= (World.sumTop || 1e9) - 2 || String(window.getSelection ? window.getSelection() : '').length) return;
+    const L = this.all, dir = this.dir; let best = null;
+    const ahead = dir > 0 ? L.find((st) => st.y >= ty) : [...L].reverse().find((st) => st.y <= ty);
+    if (ahead && Math.abs(ahead.y - ty) <= VH * 0.35) best = ahead;
+    else { const near = L.reduce((b, st) => (!b || Math.abs(st.y - ty) < Math.abs(b.y - ty) ? st : b), null); if (near) { const d = near.y - ty; if (Math.abs(d) <= VH * (Math.sign(d) === -dir ? 0.18 : 0.25)) best = near; } }
+    if (!best || (Math.abs(best.y - sy) < 2 && Math.abs(best.y - ty) < 2)) return;
+    this.glide(best.y, clamp(0.35 + 0.45 * Math.abs(best.y - sy) / VH, 0.4, 0.85), outQuart, false);
+  },
+};
+window.Snap = Snap;
+
 function start() {
   const ok = World.init($('.world')); if (!ok) document.documentElement.classList.add('no-gl');
   PlanFX.init(); World.resize(window.innerWidth, viewH()); measure();
-  if (window.Lenis && !REDUCED) { try { lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 }); } catch (e) { lenis = null; } }
+  if (window.Lenis && !REDUCED) { try { lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 0.85 }); } catch (e) { lenis = null; } }
+  Snap.init();
   introT0 = performance.now() / 1000 + 0.2; requestAnimationFrame(loop);
   setTimeout(() => { intro.classList.add('done'); document.body.classList.add('ready'); }, REDUCED ? 0 : 450);
   Text.hook(REDUCED ? 0 : 1.1);
