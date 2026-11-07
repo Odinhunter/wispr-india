@@ -48,6 +48,13 @@ body[data-side="left"] .s-left, body[data-side="right"] .s-right, body[data-side
 .grain { position: fixed; inset: -50%; z-index: 1; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); animation: grain 1.2s steps(6) infinite; }
 @keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
 
+@media (pointer: coarse), (max-width: 760px) {
+  :root { --glass: rgba(10, 10, 24, 0.8); }
+  html { overscroll-behavior-y: none; }
+  .world { height: 100vh; height: 100lvh; }
+  .grain { display: none; }
+  *, *::before, *::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
 /* top bar */
 .topbar { position: fixed; z-index: 50; top: 0; left: 0; right: 0; height: calc(var(--top) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--gut) 0; display: flex; align-items: center; gap: 28px; background: linear-gradient(rgba(5, 6, 14, 0.72), rgba(5, 6, 14, 0)); transition: background 0.4s, color 0.4s; }
 .topbar::before { content: ""; position: absolute; z-index: -1; inset: 0 0 -64px; pointer-events: none; background: linear-gradient(rgba(5, 6, 14, 0.82) 40%, rgba(5, 6, 14, 0)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); -webkit-mask-image: linear-gradient(#000 52%, transparent); mask-image: linear-gradient(#000 52%, transparent); transition: opacity 0.4s; }
@@ -148,7 +155,7 @@ p { margin: 0 0 16px; max-width: 36em; font-size: clamp(17px, 1.28vw, 20px); lin
 .compare li b { color: var(--ink); font-weight: 720; }
 
 .racewrap { position: relative; }
-.kmc { transition: opacity 0.4s; position: sticky; top: calc(var(--top) + 18vh); z-index: 2; height: 0; display: flex; flex-direction: column; align-items: flex-end; padding-right: var(--gut); pointer-events: none; }
+.kmc { transition: opacity 0.4s; position: sticky; top: calc(var(--top) + 18vh); top: calc(var(--top) + 18svh); z-index: 2; height: 0; display: flex; flex-direction: column; align-items: flex-end; padding-right: var(--gut); pointer-events: none; }
 .kmc > * { position: relative; flex: none; }
 .kmc b { display: block; font-family: var(--display); font-weight: 560; font-size: clamp(96px, 15vw, 250px); line-height: 0.86; letter-spacing: -0.04em; color: var(--acc); font-variant-numeric: tabular-nums; text-shadow: 0 10px 60px rgba(5, 6, 14, 0.5); }
 .kmc b { transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3), text-shadow 0.5s; transform-origin: 100% 50%; }
@@ -220,9 +227,16 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
   :root { --top: 56px; }
   .scrim .s-left, .scrim .s-right, .scrim .s-center { display: none; }
   .scrim .s-bottom { opacity: 1; }
-  body[data-sky="1"] .scrim .s-bottom { opacity: 0; } /* the Bain text sits at the top here, so the globe below it stays clear */
+  body[data-sky="1"] .scrim .s-bottom, body[data-sec="hero"] .scrim .s-bottom, body[data-sec="hul"] .scrim .s-bottom, body[data-sec="bain"] .scrim .s-bottom { opacity: 0; } /* the world carries these chapters, so nothing dims it */
+  body[data-sec="mumbai"] .scrim .s-bottom, body[data-sec="lockdown"] .scrim .s-bottom { opacity: 0.3; }
+  .hero .hook, .hero .lede, #hul .blk, .bain-pin .blk, #mumbai .blk, #lockdown .blk > :not(.firsts) { text-shadow: 0 1px 14px rgba(5, 6, 14, 0.85), 0 0 3px rgba(5, 6, 14, 0.5); }
+  .place, #hul .blk .place, .bain-pin .blk .place, #mumbai .blk .place, #lockdown .blk .place { text-shadow: none; }
   .beat { align-items: flex-end; padding: calc(var(--top) + 30vh) 0 9vh; }
-  .hero .beat { align-items: center; padding-top: calc(var(--top) + 4vh); }
+  .hero .beat { align-items: flex-start; padding-top: calc(var(--top) + 3svh); padding-bottom: 0; }
+  .hero .lede { margin-top: 14px; font-size: 15px; line-height: 1.5; }
+  .hero .acts { flex-wrap: nowrap; gap: 8px; margin-top: 18px; }
+  .hero .acts .btn { flex: 0 1 auto; padding-left: 18px; padding-right: 18px; white-space: nowrap; }
+  .hero-hint { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .blk, .blk.left, .blk.right, .blk.center, .blk.wide { max-width: none; padding: 0 20px; margin: 0; }
   .blk.card { margin: 0 14px; padding: 22px 20px 16px; }
   .hook { font-size: clamp(38px, 10.6vw, 52px); }
@@ -238,7 +252,7 @@ footer { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify
   .strip li, .strip li:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
   .strip li:first-child { border-top: 0; }
   .stats b { font-size: 60px; }
-  .kmc { top: calc(var(--top) + 6vh); }
+  .kmc { top: calc(var(--top) + 6vh); top: calc(var(--top) + 6svh); }
   .kmc b { font-size: 88px; }
   .quote blockquote { font-size: 42px; }
   .call { font-size: 64px; }
@@ -883,7 +897,7 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 /* "What happened" follows straight on, then holds still while the map plays out beside it */
 #hul .beat.hul-first { padding-bottom: 0; }
 .hul-pin { margin-top: clamp(28px, 4vh, 44px); }
-.hul-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); }
+.hul-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); top: calc(var(--top) + 7svh); }
 .hul-hold { height: 235svh; }
 html.no-gl .hul-hold { height: 0; }
 .bx.hul-facts { display: none; gap: 12px 26px; margin-top: 16px; }
@@ -893,7 +907,7 @@ html.no-tags .bx.hul-facts, html.no-gl .bx.hul-facts { display: flex; }
 /* the Bain chapter: each part of the story holds still while the globe acts it out */
 #bain .beat.bain-first { padding-bottom: 0; }
 .bain-pin { margin-top: clamp(28px, 5vh, 56px); }
-.bain-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); }
+.bain-pin > .blk { position: sticky; top: calc(var(--top) + 7vh); top: calc(var(--top) + 7svh); }
 .bain-hold.ha { height: 70svh; }
 .bain-hold.hb { height: 170svh; }
 .bain-hold.hc { height: 150svh; }
@@ -906,7 +920,11 @@ html.no-gl .bain-hold { height: 0; }
 /* three fixed columns: each number holds the width of its final value, so nothing shifts or wraps while it counts */
 .bx.big { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 clamp(18px, 3vw, 46px); margin-top: 14px; }
 .bx.big b { font-size: clamp(38px, 4.6vw, 76px); letter-spacing: -0.03em; color: var(--ink); }
-.bx.big b::after { content: attr(data-w); display: block; height: 0; overflow: hidden; visibility: hidden; }
+.bx b::after, .eng b::after { content: attr(data-w); display: block; height: 0; overflow: hidden; visibility: hidden; }
+.bx b, .eng b, .kmc b { contain: layout style; }
+.dg, .dc { font-style: normal; }
+.dg { display: inline-block; width: 0.555em; text-align: center; }
+.bxl { min-height: 2.7em; }
 .bx.big span { max-width: 13ch; }
 .bx.big li:nth-child(2) b { color: #FFD27A; }
 .bx.big li:first-child b { color: #7FE3FF; }
@@ -1064,7 +1082,7 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
   <div class="hul-pin">
     <div class="blk left">
       <p class="label rv">What happened</p>
-      <p class="eng rv"><b class="engv">+20%</b><span>engagement on the new line</span></p>
+      <p class="eng rv"><b class="engv" data-w="+20%">+20%</b><span>engagement on the new line</span></p>
       <p class="rv" data-read>In 2020, I couldn’t explain why one post worked and the next one didn’t. Four years later, I finally could. Engagement went up because the campaign said what customers needed to hear, in words they already used.</p>
       <ul class="bx hul-facts rv" aria-label="15+ creators, 4 concepts tested, 70+ interviews conducted"><li aria-hidden="true"><b>15+</b><span>Creators</span></li><li aria-hidden="true"><b>4</b><span>Concepts Tested</span></li><li aria-hidden="true"><b>70+</b><span>Interviews Conducted</span></li></ul>
     </div>
@@ -1088,8 +1106,8 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
       <p class="label rv">The problem</p>
       <p class="pf rv" data-read>Every office collected its data its own way, so a team of eight had to chase all 70+ offices over long email chains, one office at a time, before any of the numbers could be used. A single cycle took three to four months.</p>
       <ul class="bx old rv" aria-label="3 to 4 months for one cycle, with 70+ offices chased one at a time">
-        <li aria-hidden="true"><b class="bxm">3 to 4 months</b><span>for one cycle</span></li>
-        <li aria-hidden="true"><b class="bxo">70+</b><span>offices chased, one at a time</span></li>
+        <li aria-hidden="true"><b class="bxm" data-w="3 to 4 months">3 to 4 months</b><span>for one cycle</span></li>
+        <li aria-hidden="true"><b class="bxo" data-w="70+">70+</b><span>offices chased, one at a time</span></li>
       </ul>
     </div>
     <div class="bain-hold ha" aria-hidden="true"></div>
@@ -1099,7 +1117,7 @@ a.pj-card:hover .pj-go i { transform: translate(3px, -3px); }
       <p class="label rv">The fix</p>
       <p class="pf rv" data-read>My first version only put the old steps online. That taught me to remove the steps nobody needs first, then automate the rest. Now every office submits data the same way, AI reads and checks the source documents, and the portal handles the processing from start to finish.</p>
       <ul class="bx rv" aria-label="70+ email chains down to one portal">
-        <li aria-hidden="true"><b class="bxc">1</b><span class="bxl">portal, replacing 70+ email chains</span></li>
+        <li aria-hidden="true"><b class="bxc" data-w="70+">1</b><span class="bxl">portal, replacing 70+ email chains</span></li>
       </ul>
     </div>
     <div class="bain-hold hb" aria-hidden="true"></div>
@@ -1415,6 +1433,10 @@ function rnd(seed) { let s = (seed >>> 0) || 1; return () => { s = (Math.imul(s,
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MOBILE = Math.min(window.innerWidth, window.innerHeight) < 700;
 const DENS = MOBILE ? 0.6 : 1;
+const TOUCH = MOBILE || window.matchMedia('(pointer: coarse)').matches;
+let VH0 = window.innerHeight, bigH = 0;
+// the canvas is sized to the tallest the viewport gets, so it never has to resize as the URL bar moves
+function viewH() { if (!TOUCH) return window.innerHeight; if (!bigH) { const d = document.createElement('div'); d.style.cssText = 'position:fixed;top:0;width:0;visibility:hidden;height:100vh;height:100lvh'; document.body.appendChild(d); bigH = Math.max(d.offsetHeight, window.innerHeight); d.remove(); } return bigH; }
 let VH = window.innerHeight;
 let SLOW = false;
 const HAS3 = typeof THREE !== 'undefined';
@@ -1675,13 +1697,13 @@ const POOLV = 'varying vec2 vUv; varying vec3 vW; void main(){ vUv = uv; vec4 w 
 const POOLF = 'uniform float uOp; uniform float uFog; varying vec2 vUv; varying vec3 vW; void main(){ float r = length((vUv - 0.5) * 2.0); float a = pow(max(1.0 - r, 0.0), 1.7) * uOp * exp(-pow(uFog * length(cameraPosition - vW), 2.0)); gl_FragColor = vec4(vec3(1.0, 0.68, 0.38), a); }';
 const BURSTV = 'attribute vec3 aV; attribute vec3 aColor; attribute float aS; uniform float uB; uniform float uPix; varying vec3 vC; varying float vA; void main(){ float t = uB * 1.25; vec3 p = position + aV * t + vec3(sin(aS * 40.0 + t * 7.0) * 0.5, -15.0 * t * t, 0.0); vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; gl_PointSize = clamp(aS * uPix * (300.0 / max(1.0, -mv.z)), 1.0, 26.0 * uPix); vA = smoothstep(0.0, 0.06, uB) * (1.0 - smoothstep(0.62, 1.0, uB)); vC = aColor; }';
 const BURSTF = 'varying vec3 vC; varying float vA; void main(){ float r = length(gl_PointCoord - 0.5) * 2.0; float a = (smoothstep(0.5, 0.12, r) + exp(-r * r * 5.0) * 0.4) * vA; if (a < 0.004) discard; gl_FragColor = vec4(vC, a); }';
-const DOTV = `${MORPH} attribute float aDp; attribute float aDl; attribute vec3 aColor; attribute float aSize; attribute float aIn; attribute float aDist; attribute float aR; attribute float aH; uniform float uPix; uniform float uSpread; uniform float uDay; uniform float uTime; uniform float uGlow; uniform float uLift; uniform float uLand; varying vec3 vC; varying float vA;
+const DOTV = `${MORPH} attribute float aDp; attribute float aDl; attribute vec3 aColor; attribute float aSize; attribute float aIn; attribute float aDist; attribute float aR; attribute float aH; uniform float uBoost; uniform float uPix; uniform float uSpread; uniform float uDay; uniform float uTime; uniform float uGlow; uniform float uLift; uniform float uLand; varying vec3 vC; varying float vA;
 void main(){ float reached = aIn * smoothstep(aDist - 0.04, aDist, uSpread) * uGlow; float pk = aH * uLift * reached; vec3 p = morph(aDp, aDl, pk * ${HUL_PEAK}); vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; float d = max(1.0, -mv.z);
   float front = aIn * exp(-pow((aDist - uSpread) / 0.016, 2.0)) * step(0.002, uSpread) * (1.0 - smoothstep(0.98, 1.05, uSpread)) * uGlow;
   float glim = reached * pow(0.5 + 0.5 * sin(uTime * 2.2 + aR * 61.0), 14.0);
   float fx = aDl * uR; float e = mix(70.0, -70.0, uDay); float dl = smoothstep(e - 22.0, e + 22.0, fx) * step(0.001, uDay);
-  vec3 night = aColor + vec3(0.385, 0.21, 0.014) * reached + vec3(0.95, 0.66, 0.32) * front * 0.6 + vec3(1.0, 0.9, 0.7) * glim * 0.3 + vec3(0.5, 0.16, 0.3) * pk; vec3 day = mix(vec3(0.84, 0.78, 0.62), vec3(0.98, 0.88, 0.62), aIn); vC = mix(night, day, dl);
-  gl_PointSize = clamp(aSize * uPix * (300.0 / d) * (1.0 + 0.21 * reached + 0.45 * front + 0.35 * glim + 0.5 * pk), 1.1, 11.0 * uPix); vA = mix(0.6 + 0.21 * reached + front * 0.6 + glim * 0.27 + 0.3 * pk, 0.95, dl) * mix(1.0, uLand, aIn); }`;
+  vec3 night = aColor * uBoost + vec3(0.385, 0.21, 0.014) * reached + vec3(0.95, 0.66, 0.32) * front * 0.6 + vec3(1.0, 0.9, 0.7) * glim * 0.3 + vec3(0.5, 0.16, 0.3) * pk; vec3 day = mix(vec3(0.84, 0.78, 0.62), vec3(0.98, 0.88, 0.62), aIn); vC = mix(night, day, dl);
+  gl_PointSize = clamp(mix(uBoost, 1.0, aIn) * aSize * uPix * (300.0 / d) * (1.0 + 0.21 * reached + 0.45 * front + 0.35 * glim + 0.5 * pk), 1.1, 11.0 * uPix); vA = mix(0.6 + 0.21 * reached + front * 0.6 + glim * 0.27 + 0.3 * pk, 0.95, dl) * mix(1.0, uLand, aIn) * mix(1.0, uBoost, (1.0 - dl) * (1.0 - reached)); }`;
 const DOTF = 'varying vec3 vC; varying float vA; void main(){ float r = length(gl_PointCoord - 0.5) * 2.0; float a = smoothstep(1.0, 0.35, r) * vA; if (a < 0.01) discard; gl_FragColor = vec4(vC, a); }';
 const MLV = `${MORPH} attribute float aDp; attribute float aDl; void main(){ vec3 p = morph(aDp, aDl, 0.03); gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0); }`;
 const MLF = 'uniform vec3 uCol; uniform float uOp; void main(){ gl_FragColor = vec4(uCol, uOp); }';
@@ -1811,15 +1833,16 @@ const GRADE = {
 const ENV0 = { hero: 'mumbai', mumbai: 'mumbai', lockdown: 'mumbai', college: 'mumbai', hul: 'earth', bain: 'earth', run: 'ggn', nights: 'ggn', next: 'blr', board: 'blr' };
 const PAL0 = { hero: 'dusk', mumbai: 'dusk', lockdown: 'night', college: 'mday', hul: 'mapnight', bain: 'space', run: 'race', nights: 'latenight', next: 'morning', board: 'morning' };
 const HW = [0.05, -0.64, -11.25];
-const HUL_END = { p: [6, 52, 66], l: [6, 0, 5] }, HUL_FAR = { p: [4, 96, 74], l: [4, 0, -25] }, HUL_ENDM = { p: [4, 84, 64], l: [4, 0, -25] }, HUL_LAND = { p: [-38, 62, 60], l: [-38, 0, 5] }; // landscape phones: India stands to the right of the text // phones: the finale sits below the text
+const HUL_END = { p: [6, 52, 66], l: [6, 0, 5] }, HUL_FAR = { p: [4, 96, 74], l: [4, 0, -25] }, HUL_ENDM = { p: [4, 66, 44], l: [4, 0, -25] }, HUL_LAND = { p: [-38, 62, 60], l: [-38, 0, 5] }; // landscape phones: India stands to the right of the text // phones: the finale sits below the text
 // the globe sits right of the text on wide screens, and low on the screen under the text on tall ones
 // the camera always looks straight at the globe, so it stays round; the picture itself slides aside to clear the text, like a shift lens
 const GLOBE_FACE = (55 * Math.PI) / 180; // the tilt that brings india round to face the camera
 const GLOBE = (y, z, dx) => ({ p: [dx, y, z], l: [0, -100, 0], m: { p: [dx * 0.4, 150 + (y - 170) * 0.6, 239 + (z - 305) * 0.6], l: [0, -100, 0] }, ml: { p: [dx, 95 + (y - 170) * 0.6, 221 + (z - 305) * 0.6], l: [0, -100, 0] } });
+const HERO_M = { p: [0, 82, 60], l: [0, 150, -190] };
 const SHOTS = {
-  hero: [{ at: 0, p: [0, 58, 262], l: [0, 92, -190] }, { at: 1, p: [-20, 57.5, 257], l: [-4, 90, -192] }],
-  mumbai: [{ at: 0.5, p: [-70, 56, 244], l: [-18, 84, -198] }, { at: 1, p: [-130, 54, 228], l: [-38, 76, -204] }],
-  lockdown: [{ at: 0.3, p: [-160, 56, 220], l: [-44, 70, -206] }, { at: 0.62, p: [60, 64, 160], l: [150, 58, -220] }, { at: 1, p: [290, 72, 80], l: [360, 56, -230] }],
+  hero: [{ at: 0, p: [0, 58, 262], l: [0, 92, -190], m: HERO_M }, { at: 1, p: [-20, 57.5, 257], l: [-4, 90, -192], m: HERO_M }],
+  mumbai: [{ at: 0.5, p: [-70, 56, 244], l: [-18, 84, -198], m: { p: [-46, 76, 40], l: [-34, 140, -200] } }, { at: 1, p: [-130, 54, 228], l: [-38, 76, -204], m: { p: [-96, 66, 30], l: [-60, 104, -210] } }],
+  lockdown: [{ at: 0.3, p: [-160, 56, 220], l: [-44, 70, -206], m: { p: [-120, 58, 20], l: [-70, 78, -210] } }, { at: 0.62, p: [60, 64, 160], l: [150, 58, -220], m: { p: [120, 56, -20], l: [170, 74, -220] } }, { at: 1, p: [290, 72, 80], l: [360, 56, -230], m: { p: [316, 60, -70], l: [376, 66, -240] } }],
   // the fly-in lands as the heading arrives; then a slow drift while the rest of college is read
   college: [{ at: 0.23, pal: 'night', p: [330, 110, 50], l: [420, 30, -380] }, { at: 0.41, pal: 'mday', p: [420, 150, -300], l: CP(0, 0, 12) }, { at: 0.59, p: CP(170, 30, 74), l: CP(0, 0, 16) }, { at: 0.77, p: CP(140, 16, 44), l: CP(0, 0, 20) }, { at: 1, p: CP(122, 20, 36), l: CP(0, 0, 21) }],
   hul: [
@@ -1866,7 +1889,7 @@ const World = {
   init(canvasEl) {
     if (!HAS3) return false;
     try { this.r = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true, powerPreference: 'high-performance' }); } catch (e) { return false; }
-    this.pix = Math.min(MOBILE ? 1.5 : 2, window.devicePixelRatio || 1); this.r.setPixelRatio(this.pix); this.r.shadowMap.enabled = true; this.r.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.pix = Math.min(MOBILE ? 1.25 : 2, window.devicePixelRatio || 1); this.r.setPixelRatio(this.pix); this.r.shadowMap.enabled = true; this.r.shadowMap.type = THREE.PCFSoftShadowMap;
     this.camA = new THREE.PerspectiveCamera(52, 1, 0.1, 6000); this.camB = new THREE.PerspectiveCamera(52, 1, 0.1, 6000); this.cam = this.camA;
     this.tex = { streak: streakTex(), shadow: shadowTex() };
     this.pal = {}; for (const k in PAL) { const p = PAL[k]; this.pal[k] = Object.assign({}, p, { cTop: C3(p.top), cHor: C3(p.hor), cBot: C3(p.bot), cSun: C3(p.sunC), cCloud: C3(p.cloudC) }); }
@@ -1875,8 +1898,8 @@ const World = {
     this.raceL = Object.assign({}, this.pal.race, { cTop: new THREE.Color(), cHor: new THREE.Color(), cBot: new THREE.Color(), cSun: new THREE.Color(), cCloud: new THREE.Color() }); this.gr = GRADE.dusk.slice(); this.spike = 0; this.zoom = 0;
     this.mumbai(); this.earth(); this.ggn(); this.blr();
     for (const k in this.envs) { const e = this.envs[k]; e.sky = new THREE.Mesh(this.skyGeo, this.skyMat); e.sky.renderOrder = -2; e.scene.add(e.sky); }
-    const RT = this.r.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget ? THREE.WebGLMultisampleRenderTarget : THREE.WebGLRenderTarget;
-    const deep = { stencilBuffer: true }; this.rtA = new RT(4, 4, deep); this.rtB = new RT(4, 4, deep); if (MOBILE) { this.rtA.samples = 2; this.rtB.samples = 2; }
+    const RT = !MOBILE && this.r.capabilities.isWebGL2 && THREE.WebGLMultisampleRenderTarget ? THREE.WebGLMultisampleRenderTarget : THREE.WebGLRenderTarget; // phones draw straight to the screen; these only serve their crossfades, at reduced size
+    const deep = { stencilBuffer: true }; this.rtA = new RT(4, 4, deep); this.rtB = new RT(4, 4, deep);
     this.compU = { tA: { value: this.rtA.texture }, tB: { value: this.rtB.texture }, uMix: { value: 0 } };
     this.comp = new THREE.Scene(); this.compCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     this.comp.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({ uniforms: this.compU, depthTest: false, depthWrite: false, vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }', fragmentShader: 'uniform sampler2D tA; uniform sampler2D tB; uniform float uMix; varying vec2 vUv; void main(){ gl_FragColor = mix(texture2D(tA, vUv), texture2D(tB, vUv), uMix); }' })));
@@ -1889,8 +1912,8 @@ const World = {
       this.brU = { tA: { value: this.rtA.texture }, tB: { value: this.rtB.texture }, uMix: { value: 0 }, uTh: { value: 0.5 }, uPx: { value: new THREE.Vector2() } }; this.brM = fs(this.brU, BRIGHTF);
       this.blU = { tS: { value: null }, uDir: { value: new THREE.Vector2() } }; this.blM = fs(this.blU, BLURF);
       this.fiU = { tA: this.brU.tA, tB: this.brU.tB, tL1: { value: this.bl[0].texture }, tL2: { value: this.bl[MOBILE ? 0 : 3].texture }, uMix: this.brU.uMix, uBloom: { value: 0 }, uWide: { value: MOBILE ? 0 : 0.8 }, uSat: { value: 1 }, uCon: { value: 0 }, uVig: { value: 0 }, uZoom: { value: 0 }, uTime: this.SU.uTime, uSh: { value: new THREE.Vector3(1, 1, 1) }, uHi: { value: new THREE.Vector3(1, 1, 1) } }; this.fiM = fs(this.fiU, FINALF);
-      if (!REDUCED) this.buildFlight();
     }
+    if (!REDUCED) this.buildFlight();
     setTimeout(() => { if (this.roomG.visible) return; this.roomG.visible = true; try { this.r.compile(this.envs.ggn.scene, this.camA); } catch (e) { /* it compiles on first sight instead */ } this.roomG.visible = false; }, 2500);
     this.side = 0; this.mx = 0; this.my = 0; this.ok = true; return true;
   },
@@ -1926,7 +1949,7 @@ const World = {
     ov.U.uU.value = u; this.r.setRenderTarget(null); this.r.autoClear = false; this.r.render(ov.S, this.camA); this.r.autoClear = true;
   },
   env(name) { const s = new THREE.Scene(); s.fog = new THREE.FogExp2(0x05060e, 0.001); const e = { scene: s, name, lights: [], bld: [], mt: [] }; this.envs[name] = e; return e; },
-  addLights(e, lb, parent) { const p = lb.build(this.pix); (parent || e.scene).add(p); e.lights.push(p); return p; },
+  addLights(e, lb, parent) { const p = lb.build(this.pix * (MOBILE ? 1.35 : 1)); (parent || e.scene).add(p); e.lights.push(p); return p; },
   addBld(e, bg, dayCol) { const U = bldU(dayCol); e.scene.add(bg.mesh(U)); e.bld.push(U); return U; },
   addMT(e, mt) { const U = mtU(); e.scene.add(mt.mesh(U)); e.mt.push(U); return U; },
 
@@ -1934,7 +1957,7 @@ const World = {
   mumbai() {
     const e = this.env('mumbai'), S = e.scene, R = rnd(5), RAD = MR, CZ = MCZ;
     this.mHemi = new THREE.HemisphereLight(0xdfe8ff, 0x5a4c3e, 0); this.mSun = new THREE.DirectionalLight(0xffe6c4, 0); S.add(this.mHemi, this.mSun, this.mSun.target);
-    this.mSun.castShadow = true; this.mSun.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048); Object.assign(this.mSun.shadow.camera, { left: -100, right: 100, top: 100, bottom: -100, near: 1, far: 1400 }); this.mSun.shadow.bias = -0.0006; this.mSun.shadow.normalBias = 0.03;
+    this.mSun.castShadow = true; this.mSun.shadow.mapSize.set(MOBILE ? 512 : 2048, MOBILE ? 512 : 2048); if (MOBILE) this.mSun.shadow.autoUpdate = false; Object.assign(this.mSun.shadow.camera, { left: -100, right: 100, top: 100, bottom: -100, near: 1, far: 1400 }); this.mSun.shadow.bias = -0.0006; this.mSun.shadow.normalBias = 0.03;
     this.watU = { uDeep: { value: C3('#03050C') }, uTop: { value: new THREE.Color() }, uHor: { value: new THREE.Color() }, uCity: { value: C3('#FFB868') }, uSunCol: { value: new THREE.Color() }, uSunDir: this.SU.uSunDir, uFogCol: { value: new THREE.Color() }, uCityAmt: { value: 1 }, uSun: { value: 0 }, uTime: this.SU.uTime, uFog: { value: 0.0011 } };
     const water = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000, 200, 200), new THREE.ShaderMaterial({ uniforms: this.watU, vertexShader: WATV, fragmentShader: WATF })); water.rotation.x = -Math.PI / 2; water.position.y = -1.2; S.add(water);
     const shore = []; for (let i = 0; i <= 90; i++) { const th = lerp(-1.25, 1.32, i / 90); shore.push([RAD * Math.sin(th), CZ - RAD * Math.cos(th)]); }
@@ -1982,9 +2005,9 @@ const World = {
       fragmentShader: 'varying vec3 vC; varying float vA; void main(){ float r = length(gl_PointCoord - 0.5) * 2.0; float a = (exp(-r * r * 10.0) + 0.25 * exp(-r * r * 2.5)) * vA; if (a < 0.004) discard; gl_FragColor = vec4(vC, a); }' }));
     tr.frustumCulled = false; S.add(tr);
     e.update = (st, dt, now) => {
-      const U = this.mL.userData.U.uLit.value; U[1] = st.neck; U[2] = st.home; e.bld.forEach((U) => { U.uLit.value = st.win; U.uDay.value = Math.max(st.day, st.moon || 0); }); this.mMT.uLit.value = st.win; this.mMT.uDay.value = Math.max(st.day, st.moon || 0); this.paneM.material.opacity = st.home;
+      const U = this.mL.userData.U.uLit.value; U[1] = st.neck; U[2] = st.home; const wn = MOBILE ? Math.min(1, st.win * 1.7 + 0.03 * (1 - st.day)) : st.win; e.bld.forEach((U) => { U.uLit.value = wn; U.uDay.value = Math.max(st.day, st.moon || 0); }); this.mMT.uLit.value = wn; this.mMT.uDay.value = Math.max(st.day, st.moon || 0); this.paneM.material.opacity = st.home;
       this.watU.uCityAmt.value = (0.3 + 0.7 * st.neck) * (1 - st.day); this.mtrU.uPhase.value += dt; this.mtrU.uDense.value = st.traffic;
-      this.mHemi.intensity = 0.1 + 0.75 * st.day; this.mSun.intensity = 1.2 * st.day; this.mSun.position.set(CX, 0, CZc).addScaledVector(this.SU.uSunDir.value, 500); this.mSun.target.position.set(CX, 0, CZc);
+      this.mHemi.intensity = 0.1 + 0.75 * st.day; this.mSun.intensity = 1.2 * st.day; this.mSun.position.set(CX, 0, CZc).addScaledVector(this.SU.uSunDir.value, 500); this.mSun.target.position.set(CX, 0, CZc); if (MOBILE && st.day > 0.01) { const y = this.SU.uSunDir.value.y; if (Math.abs(y - (this.shY === undefined ? 9 : this.shY)) > 0.03) { this.shY = y; this.mSun.shadow.needsUpdate = true; } }
       this.landM.color.setHex(st.day > 0.5 ? 0xd2cec6 : 0x2a2a2e); this.xavLamp.forEach((m) => { m.material.color.setHex(st.day > 0.5 ? 0x8a7a5a : 0xffd890); });
       this.refl.forEach((s) => { const o = 0.36 * sstep(s.userData.on, s.userData.on + 0.05, st.neck) * (0.8 + 0.2 * Math.sin(now * 1.8 + s.userData.ph)); s.material.opacity = o; s.visible = o > 0.01; s.scale.x = 2.1 * (0.85 + 0.2 * Math.sin(now * 2.2 + s.userData.ph * 1.3)); });
     };
@@ -2085,11 +2108,11 @@ const World = {
     // the warm wave starts from each landing point the moment its arc arrives; peaks stand under the points and fall to nothing before the coast, so the outline stays true
     D.h = D.dist.map((_, i) => { if (!D.in[i]) return 0; const x = D.dl[i] * Math.cos(PHI0) * ER, z = -D.dp[i] * ER; let t = 1e9, h = 0; CR.forEach((c) => { const dd = Math.hypot(x - c.x, z - c.z); t = Math.min(t, c.delay + dd / maxD); h = Math.max(h, Math.exp(-((dd / 1.9) ** 2))); }); D.dist[i] = t; return h; });
     const dg = new THREE.BufferGeometry(); dg.setAttribute('aH', new THREE.Float32BufferAttribute(D.h, 1)); dg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(D.dp.length * 3), 3)); dg.setAttribute('aDp', new THREE.Float32BufferAttribute(D.dp, 1)); dg.setAttribute('aDl', new THREE.Float32BufferAttribute(D.dl, 1)); dg.setAttribute('aColor', new THREE.Float32BufferAttribute(D.col, 3)); dg.setAttribute('aSize', new THREE.Float32BufferAttribute(D.size, 1)); dg.setAttribute('aIn', new THREE.Float32BufferAttribute(D.in, 1)); dg.setAttribute('aDist', new THREE.Float32BufferAttribute(D.dist, 1)); dg.setAttribute('aR', new THREE.Float32BufferAttribute(D.r, 1));
-    this.dotU = Object.assign({ uPix: { value: this.pix }, uSpread: { value: 0 }, uDay: { value: 0 }, uTime: this.SU.uTime, uGlow: { value: 0 }, uLift: { value: 0 }, uLand: { value: 1 } }, this.mU);
+    this.dotU = Object.assign({ uPix: { value: this.pix }, uSpread: { value: 0 }, uDay: { value: 0 }, uTime: this.SU.uTime, uGlow: { value: 0 }, uLift: { value: 0 }, uLand: { value: 1 }, uBoost: { value: MOBILE ? 1.4 : 1 } }, this.mU);
     const dots = new THREE.Points(dg, new THREE.ShaderMaterial({ uniforms: this.dotU, vertexShader: DOTV, fragmentShader: DOTF, transparent: true, depthWrite: false })); dots.frustumCulled = false; EB.add(dots);
     const lineGeo = (rings, minLen) => { const dp = [], dlA = []; rings.forEach((r) => { if (minLen && r.length < minLen) return; for (let i = 0; i < r.length - 2; i += 2) { dp.push(((r[i + 1] * Math.PI) / 180) - PHI0, ((r[i + 3] * Math.PI) / 180) - PHI0); dlA.push(((r[i] * Math.PI) / 180) - LAM0, ((r[i + 2] * Math.PI) / 180) - LAM0); } }); const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(dp.length * 3), 3)); g.setAttribute('aDp', new THREE.Float32BufferAttribute(dp, 1)); g.setAttribute('aDl', new THREE.Float32BufferAttribute(dlA, 1)); return g; };
-    this.bordU = Object.assign({ uCol: { value: C3('#4C5C90') }, uOp: { value: 0.3 } }, this.mU); const bl = new THREE.LineSegments(lineGeo(GEO.world.borders), new THREE.ShaderMaterial({ uniforms: this.bordU, vertexShader: MLV, fragmentShader: MLF, transparent: true, depthWrite: false })); bl.frustumCulled = false; EB.add(bl);
-    this.indU = Object.assign({ uCol: { value: C3('#7E8FD4') }, uOp: { value: 0.6 } }, this.mU); const il = new THREE.LineSegments(lineGeo(GEO.india.outline, 400), new THREE.ShaderMaterial({ uniforms: this.indU, vertexShader: MLV, fragmentShader: MLF, transparent: true, depthWrite: false })); il.frustumCulled = false; EB.add(il);
+    this.bordU = Object.assign({ uCol: { value: C3(MOBILE ? '#7C90D0' : '#4C5C90') }, uOp: { value: MOBILE ? 0.5 : 0.3 } }, this.mU); const bl = new THREE.LineSegments(lineGeo(GEO.world.borders), new THREE.ShaderMaterial({ uniforms: this.bordU, vertexShader: MLV, fragmentShader: MLF, transparent: true, depthWrite: false })); bl.frustumCulled = false; EB.add(bl);
+    this.indU = Object.assign({ uCol: { value: C3(MOBILE ? '#AAB8F4' : '#7E8FD4') }, uOp: { value: MOBILE ? 0.9 : 0.6 } }, this.mU); const il = new THREE.LineSegments(lineGeo(GEO.india.outline, 400), new THREE.ShaderMaterial({ uniforms: this.indU, vertexShader: MLV, fragmentShader: MLF, transparent: true, depthWrite: false })); il.frustumCulled = false; EB.add(il);
     const lab = (n, lon, lat) => { const [x, z] = mapXZ(lon, lat), s = new THREE.Sprite(new THREE.SpriteMaterial({ map: labelTex(n, 54, '#ECE7F7'), transparent: true, opacity: 0, depthWrite: false })); s.scale.set(10, 2.5, 1); s.position.set(x, 2.2, z - 1.8); EB.add(s); return s; };
     this.lab = { mumbai: lab('Mumbai', 72.88, 21.6), delhi: lab('Delhi', 77.21, 28.61), blr: lab('Bangalore', 77.59, 12.97) };
     // the campaign, told on the map: 77 voices, 4 concepts, one brief, 15 landing points
@@ -2364,7 +2387,7 @@ const World = {
     [[-9, 0.12, tA], [3, -0.08, tB], [15, 0.1, tC], [27, -0.06, tA]].forEach(([x, ry, tpl]) => { const g = new THREE.Group(); tpl.forEach(([geo, mat]) => g.add(new THREE.Mesh(geo, mat))); const sh = new THREE.Mesh(shG, shM); sh.rotation.x = -Math.PI / 2; sh.position.y = 0.03; g.add(sh); g.position.set(x, 0, 6.35); g.rotation.y = Math.PI + ry; S.add(g); });
     e.update = (st, dt, now) => { this.autos.forEach((a) => { a.g.position.x += a.dir * a.sp * dt; if (a.g.position.x > 72) a.g.position.x -= 144; if (a.g.position.x < -72) a.g.position.x += 144; a.g.position.y = Math.abs(Math.sin(now * 9 + a.ph)) * 0.015; }); this.bB.uLit.value = 0.05; };
   },
-  resize(w, h) { if (!this.ok) return; this.w = w; this.h = h; this.r.setSize(w, h, false); this.portrait = h > w * 1.08; [this.camA, this.camB, this.camX, this.camY].forEach((c) => { if (!c) return; c.aspect = w / h; c.fov = this.portrait ? 66 : 52; c.updateProjectionMatrix(); }); const s = this.r.getDrawingBufferSize(new THREE.Vector2()); this.rtA.setSize(s.x, s.y); this.rtB.setSize(s.x, s.y); if (this.bl) { const a = Math.max(2, s.x >> 2), b = Math.max(2, s.y >> 2), c = Math.max(2, s.x >> 3), d = Math.max(2, s.y >> 3); this.bl[0].setSize(a, b); this.bl[1].setSize(a, b); this.bl[2].setSize(c, d); this.bl[3].setSize(c, d); } },
+  resize(w, h) { if (!this.ok) return; this.w = w; this.h = h; this.r.setSize(w, h, false); this.portrait = h > w * 1.08; [this.camA, this.camB, this.camX, this.camY].forEach((c) => { if (!c) return; c.aspect = w / h; c.fov = this.portrait ? 66 : 52; c.updateProjectionMatrix(); }); const s = this.r.getDrawingBufferSize(new THREE.Vector2()); const rs = MOBILE ? 0.6 : 1; this.rtA.setSize(Math.ceil(s.x * rs), Math.ceil(s.y * rs)); this.rtB.setSize(Math.ceil(s.x * rs), Math.ceil(s.y * rs)); if (this.bl) { const a = Math.max(2, s.x >> 2), b = Math.max(2, s.y >> 2), c = Math.max(2, s.x >> 3), d = Math.max(2, s.y >> 3); this.bl[0].setSize(a, b); this.bl[1].setSize(a, b); this.bl[2].setSize(c, d); this.bl[3].setSize(c, d); } },
   applyPal(env, a, b, t) {
     const dawn = sstep(0.36, 0.94, sp.run || 0), live = (k) => { if (k !== 'race') return this.pal[k]; const L = this.raceL, r = this.pal.race, d = this.pal.raceDawn; ['cTop', 'cHor', 'cBot', 'cSun', 'cCloud'].forEach((c) => L[c].copy(r[c]).lerp(d[c], dawn)); ['sun', 'cloud', 'stars', 'moon', 'fog'].forEach((c) => { L[c] = lerp(r[c], d[c], dawn); }); return L; };
     const SU = this.SU, A = live(a), B = live(b), gr = (k) => (k === 'race' ? GRADE.race.map((v, i) => lerp(v, GRADE.raceDawn[i], dawn)) : GRADE[k]), ga = gr(a), gb = gr(b); this.gr = ga.map((v, i) => lerp(v, gb[i], t));
@@ -2438,7 +2461,7 @@ function bainMarks(s) {
 }
 function measure() { const pfm = window.PlanFX; if (pfm && pfm.ready) pfm.measure();
   document.documentElement.classList.toggle('no-tags', MOBILE || !!World.portrait);
-  VH = window.innerHeight; KF = [];
+  VH = TOUCH ? VH0 : window.innerHeight; KF = [];
   SECS.forEach((s, i) => { const r = s.el.getBoundingClientRect(); s.top = r.top + window.scrollY; s.h = s.el.offsetHeight; s.d0 = Math.max(0, s.top - VH * 0.9); s.d1 = Math.max(s.d0 + 1, s.top + s.h - VH * 0.9); if (s.key === 'hul') hulMarks(s); if (s.key === 'bain') bainMarks(s); let env = ENV0[s.key], pal = PAL0[s.key]; const small = MOBILE || World.portrait; SHOTS[s.key].forEach((k) => { env = k.env || env; pal = k.pal || pal; const alt = small && (!World.portrait && k.ml ? k.ml : k.m), at = k.hm ? HM[k.hm] : k.bm ? BM[k.bm] * (k.bk || 1) : s.key === 'hul' && k.at < 0.4 ? k.at * HM.k : k.at; KF.push({ y: s.d0 + at * (s.d1 - s.d0), ez: k.ez, p: alt ? alt.p : k.p, l: alt ? alt.l : k.l, x: k.x, n: k.n, env, pal, s: i, sm: SMOOTH.has(s.key) }); }); });
   const sum = $('#summary'); World.sumTop = sum ? sum.getBoundingClientRect().top + window.scrollY : 1e9;
 }
@@ -2507,18 +2530,20 @@ function poseAt(y) {
 /* ============================================================
    page: active section, progress, race counter, engagement
    ============================================================ */
-const bxl = $('.bxl'), bxm = $('.bxm'), bxo = $('.bxo'), bxc = $('.bxc'), bxt = $('.bxt'), bxs = $('.bxs'), bxf = $('.bxf'), put = (el, v) => { if (el._v !== v) { el._v = v; el.textContent = v; } }, wake = (el, q) => { const o = (0.14 + 0.86 * q).toFixed(2); if (el._o !== o) { el._o = o; el.style.opacity = o; } };
+const bxl = $('.bxl'), bxm = $('.bxm'), bxo = $('.bxo'), bxc = $('.bxc'), bxt = $('.bxt'), bxs = $('.bxs'), bxf = $('.bxf'), put = (el, v) => { if (el._v === v) return; el._v = v; if (/[a-z]/.test(v) || !/\d/.test(v)) { el._c = null; el.textContent = v; return; } if (!el._c) { el.textContent = ''; el._c = []; } const c = el._c, ch = [...v]; while (c.length < ch.length) { const i = document.createElement('i'); el.appendChild(i); c.push(i); } while (c.length > ch.length) c.pop().remove(); ch.forEach((x, i) => { if (c[i]._t !== x) { c[i]._t = x; c[i].textContent = x; c[i].className = /\d/.test(x) ? 'dg' : 'dc'; } }); }, wake = (el, q) => { const o = (0.14 + 0.86 * q).toFixed(2); if (el._o !== o) { el._o = o; el.style.opacity = o; } };
 const kmv = $('.kmv'), kmc = $('.kmc'), engv = $('.engv'), prog = $('.prog i'), navA = $$('.nav a');
 let curSec = -1;
+let lastTick = 0;
 function framePage(sy) {
   const mid = sy + VH * 0.5; let idx = -1; SECS.forEach((s, i) => { if (mid >= s.top && mid < s.top + s.h) idx = i; });
-  if (idx !== curSec) { curSec = idx; document.body.dataset.side = idx >= 0 ? SECS[idx].side : 'none'; const id = idx >= 0 ? SECS[idx].id : ''; navA.forEach((a) => a.classList.toggle('cur', a.getAttribute('href') === '#' + id)); }
+  if (idx !== curSec) { curSec = idx; document.body.dataset.side = idx >= 0 ? SECS[idx].side : 'none'; document.body.dataset.sec = idx >= 0 ? SECS[idx].key : ''; const id = idx >= 0 ? SECS[idx].id : ''; navA.forEach((a) => a.classList.toggle('cur', a.getAttribute('href') === '#' + id)); }
   const end = World.sumTop || 1, pv = clamp(sy / Math.max(1, end - VH), 0, 1); if (prog._v !== pv) { prog._v = pv; prog.style.transform = `scaleX(${pv.toFixed(4)})`; }
   const r = sp.run || 0;
   if (kmc) { const o = (sstep(0.3, 0.36, r) * (1 - sstep(0.948, 0.968, r))).toFixed(3); kmc.classList.toggle('done', r >= 0.94); if (kmc._o !== o) { kmc._o = o; kmc.style.opacity = o; } }
-  if (kmv) { const s = (21.1 * clamp((r - 0.36) / 0.58, 0, 1)).toFixed(1); if (kmv._s !== s) { kmv._s = s; kmv.textContent = s; } }
-  if (bxm) { const T = bainT(sp.bain || 0), all = REDUCED || !World.ok, g = all ? 1 : T.g, c = all ? 1 : clamp(T.cut / 0.7, 0, 1), n = all ? 1 : T.nw, k = (x, a, z) => clamp((x - a) / (z - a), 0, 1); put(bxm, g >= 0.995 ? '3 to 4 months' : 'Month ' + Math.max(1, Math.ceil(g * 3.5))); put(bxo, g >= 0.995 ? '70+' : String(Math.round(g * 70))); put(bxc, c <= 0 ? '70+' : String(Math.round(lerp(70, 1, c)))); put(bxl, c >= 1 ? 'portal, replacing 70+ email chains' : 'email chains'); put(bxt, Math.round(50 * k(n, 0, 0.8)) + '%'); put(bxs, '$' + Math.round(80 * k(n, 0.1, 0.9)) + 'K'); put(bxf, n >= 1 ? '70+' : String(Math.round(70 * k(n, 0.2, 1)))); wake(bxt, k(n, 0, 0.12)); wake(bxs, k(n, 0.1, 0.22)); wake(bxf, k(n, 0.2, 0.32)); }
-  if (engv) { const all = REDUCED || !World.ok, h = sp.hul || 0; put(engv, '+' + (all ? 20 : Math.round(20 * sstep(HM.e0, HM.e1, h))) + '%'); wake(engv, all ? 1 : sstep(HM.e0, lerp(HM.e0, HM.e1, 0.14), h)); }
+  const tk = performance.now(), tick = !TOUCH || tk - lastTick > 84; if (tick) lastTick = tk; // phones get about twelve counter updates a second
+  if (kmv && tick) put(kmv, (21.1 * clamp((r - 0.36) / 0.58, 0, 1)).toFixed(1));
+  if (bxm && tick) { const T = bainT(sp.bain || 0), all = REDUCED || !World.ok, g = all ? 1 : T.g, c = all ? 1 : clamp(T.cut / 0.7, 0, 1), n = all ? 1 : T.nw, k = (x, a, z) => clamp((x - a) / (z - a), 0, 1); put(bxm, g >= 0.995 ? '3 to 4 months' : 'Month ' + Math.max(1, Math.ceil(g * 3.5))); put(bxo, g >= 0.995 ? '70+' : String(Math.round(g * 70))); put(bxc, c <= 0 ? '70+' : String(Math.round(lerp(70, 1, c)))); put(bxl, c >= 1 ? 'portal, replacing 70+ email chains' : 'email chains'); put(bxt, Math.round(50 * k(n, 0, 0.8)) + '%'); put(bxs, '$' + Math.round(80 * k(n, 0.1, 0.9)) + 'K'); put(bxf, n >= 1 ? '70+' : String(Math.round(70 * k(n, 0.2, 1)))); wake(bxt, k(n, 0, 0.12)); wake(bxs, k(n, 0.1, 0.22)); wake(bxf, k(n, 0.2, 0.32)); }
+  if (engv && tick) { const all = REDUCED || !World.ok, h = sp.hul || 0; put(engv, '+' + (all ? 20 : Math.round(20 * sstep(HM.e0, HM.e1, h))) + '%'); wake(engv, all ? 1 : sstep(HM.e0, lerp(HM.e0, HM.e1, 0.14), h)); }
   const pt = sy + 64 >= (World.sumTop || 1e9); if (document.body._pt !== pt) { document.body._pt = pt; document.body.classList.toggle('paper-top', pt); }
 }
 
@@ -2530,17 +2555,17 @@ function scrollToY(y, smooth) { if (lenis) lenis.scrollTo(y, smooth ? { duration
 Text.init(); Deck.init(); Pass.init();
 const intro = document.createElement('div'); intro.className = 'intro'; intro.setAttribute('aria-hidden', 'true'); intro.innerHTML = '<div><b>Ishan Kabra</b><span></span></div>'; document.body.appendChild(intro);
 $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => { const id = a.getAttribute('href').slice(1); const el = id && document.getElementById(id); if (!el) return; e.preventDefault(); if (id === 'plan' && window.PlanFX && window.PlanFX.ready) { window.PlanFX.go(0); return; } if (el.tagName === 'DETAILS') el.open = true; scrollToY(id === 'top' ? 0 : el.getBoundingClientRect().top + window.scrollY - (id !== 'summary' && el.closest('#summary') ? 92 : 0), true); }));
-let last = performance.now() / 1000, frames = 0, ft = 0.016;
+let last = performance.now() / 1000, lastDraw = 0, frames = 0, ft = 0.016;
 function loop(ms) {
   const now = performance.now() / 1000, dt = Math.min(0.1, now - last); last = now;
   if (lenis) lenis.raf(ms);
   const sy = window.scrollY; progress(sy);
   if (World.ok && !World.covered && sy < (World.sumTop || 1e9) + 10) {
-    frameWorld(now, dt, sy);
-    ft = ft * 0.96 + dt * 0.04; SLOW = ft > 0.05;
-    if (!World.lowQ && !/qa/.test(location.hash)) { frames++; if (frames > 120 && ft > 0.036 && World.post && !World.lowBloom) { World.lowBloom = true; frames = 0; ft = 0.02; } else if (frames > 120 && ft > 0.036) { World.lowQ = true; World.post = false; World.pix = 1; World.r.setPixelRatio(1); Object.values(World.envs).forEach((e) => e.lights.forEach((p) => { p.userData.U.uPix.value = 1; })); World.resize(window.innerWidth, window.innerHeight); } }
+    const dw = Math.min(0.1, now - lastDraw); if (!MOBILE || dw >= 0.0305) { lastDraw = now; frameWorld(now, dw, sy);
+    ft = ft * 0.96 + dw * 0.04; SLOW = ft > (MOBILE ? 0.06 : 0.05);
+    if (!World.lowQ && !/qa/.test(location.hash)) { frames++; const fw = MOBILE ? 45 : 120, fl = MOBILE ? 0.05 : 0.036; if (frames > fw && ft > fl && World.post && !World.lowBloom) { World.lowBloom = true; frames = 0; ft = 0.02; } else if (frames > fw && ft > fl) { World.lowQ = true; World.post = false; World.pix = 1; World.r.setPixelRatio(1); Object.values(World.envs).forEach((e) => e.lights.forEach((p) => { p.userData.U.uPix.value = 1; })); World.resize(window.innerWidth, viewH()); } } }
   }
-  framePage(sy); Text.frame(sy);
+  Text.frame(sy); framePage(sy);
   requestAnimationFrame(loop);
 }
 
@@ -2671,14 +2696,14 @@ window.PlanFX = PlanFX;
 
 function start() {
   const ok = World.init($('.world')); if (!ok) document.documentElement.classList.add('no-gl');
-  PlanFX.init(); World.resize(window.innerWidth, window.innerHeight); measure();
+  PlanFX.init(); World.resize(window.innerWidth, viewH()); measure();
   if (window.Lenis && !REDUCED) { try { lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 }); } catch (e) { lenis = null; } }
   introT0 = performance.now() / 1000 + 0.2; requestAnimationFrame(loop);
   setTimeout(() => { intro.classList.add('done'); document.body.classList.add('ready'); }, REDUCED ? 0 : 450);
   Text.hook(REDUCED ? 0 : 1.1);
   window.__qa = { World, SECS, measure, sp, HM, BM, PlanFX, poseAt, kf: () => KF, goY(y) { scrollToY(y, false); return y; }, goSec(id, f) { const s = SECS.find((x) => x.id === id); const y = s.d0 + f * (s.d1 - s.d0); scrollToY(y, false); return y; } };
 }
-let rt = 0; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { World.resize(window.innerWidth, window.innerHeight); measure(); }, 150); });
+let rt = 0, lastVW = window.innerWidth; window.addEventListener('resize', () => { if (TOUCH && window.innerWidth === lastVW) return; lastVW = window.innerWidth; clearTimeout(rt); rt = setTimeout(() => { VH0 = window.innerHeight; bigH = 0; World.resize(window.innerWidth, viewH()); measure(); }, 150); });
 const fontsReady = document.fonts && document.fonts.load ? Promise.all([document.fonts.load('800 20px "Rec"'), document.fonts.load('560 40px "Fraunces"'), document.fonts.ready]).catch(() => null) : Promise.resolve();
 Promise.race([fontsReady, new Promise((r) => setTimeout(r, 1800))]).then(start);
 })();
