@@ -736,10 +736,10 @@ body.flow-top .tb-sum { border-color: rgba(29, 28, 23, 0.28); }
 /* 05 sell to the founder */
 #plan .fp5-g { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 #plan .play { display: grid; grid-template-columns: minmax(160px, 38%) minmax(0, 1fr); gap: 18px; overflow: hidden; padding: 0; }
-#plan .play .stat { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; padding: 18px; background: linear-gradient(160deg, #1D4A42, #0C2420); color: #FFFDEE; }
+#plan .play .stat { container-type: inline-size; position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; padding: 18px; background: linear-gradient(160deg, #1D4A42, #0C2420); color: #FFFDEE; }
 #plan .play.ag .stat { background: linear-gradient(160deg, #4A3523, #1E1612); }
 #plan .play .tagp { position: absolute; top: 16px; left: 16px; }
-#plan .play .stat b { font-family: "EBG", Georgia, serif; font-weight: 500; font-size: clamp(28px, min(2.6vw, 5vh), 46px); line-height: 1; white-space: nowrap; }
+#plan .play .stat b { font-family: "EBG", Georgia, serif; font-weight: 500; font-size: min(clamp(28px, min(2.6vw, 5vh), 46px), 21cqi); line-height: 1; white-space: nowrap; }
 #plan .play .stat p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.4; color: rgba(255, 253, 238, 0.86); }
 #plan .play .body { padding: 18px 20px 18px 0; }
 #plan .play h4 { margin: 2px 0 6px; font-family: "EBG", Georgia, serif; font-weight: 500; font-size: clamp(24px, min(2.2vw, 3.8vh), 34px); line-height: 1; }
